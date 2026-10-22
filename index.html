@@ -1,492 +1,1285 @@
 <!doctype html>
+
 <!--
-  Été en Bretagne | Site photographique d'Aurélien
+
+  | Site photographique d'Aurélien
+
   Adaptation personnelle du modèle « Read Only » de HTML5 UP.
+
   Crédit du modèle original : html5up.net | @ajlkn
+
   Licence du modèle original : CCA 3.0 (html5up.net/license)
+
 -->
+
 <html lang="fr">
+
 <head>
+
   <meta charset="utf-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <meta name="description" content="Le carnet photographique d'Aurélien : Bretagne, Japon, Canada et New York.">
+
   <meta name="theme-color" content="#faf9f6">
-  <title>Été en Bretagne | Aurélien</title>
-  <style>
+
+  <title>3 ans en images | Aurélien</title>
+
+<style>
+
     :root {
-      --fond: #5b5a5775;
+
+      --fond: #faf9f6;
+
       --blanc: #ffffff;
-      --texte: oklab(24.575% 0.00181 -0.08425);
-      --secondaire: #696973;
-      --vert: #33374f;
-      --vert-fonce: #441b23;
-      --bordure: #e8e9e3;
+
+      --texte: #242a2c;
+
+      --secondaire: #636c70;
+
+      --vert: #33464a;
+
+      --vert-fonce: #263e43;
+
+      --bordure: #e5e5df;
+
       --serif: Georgia, 'Times New Roman', serif;
+
       --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+
     }
+
     * { box-sizing: border-box; }
+
     html { scroll-behavior: smooth; }
+
     body { margin: 0; color: var(--texte); background: var(--fond); font-family: var(--sans); line-height: 1.65; }
+
     a { color: inherit; }
+
     button { font: inherit; }
+
     img { max-width: 100%; }
+
     ::selection { background: #dce8df; }
+
     .container { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+
     section[id] { scroll-margin-top: 100px; }
 
     /* Navigation */
-    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(250, 249, 246, .96); border-bottom: 1px solid var(--bordure); backdrop-filter: blur(12px); }
+
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(250, 249, 246, .97); border-bottom: 1px solid var(--bordure); backdrop-filter: blur(12px); }
+
     .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 78px; }
+
     .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; white-space: nowrap; }
+
     .brand-mark { display: grid; place-items: center; width: 39px; height: 39px; border: 1px solid var(--vert); border-radius: 50%; color: var(--vert); font-family: var(--serif); font-size: 23px; }
+
     .brand-name { display: block; font-family: var(--serif); font-size: 19px; line-height: 1.15; }
+
     .brand-note { display: block; color: var(--secondaire); font-size: 10px; letter-spacing: .17em; text-transform: uppercase; }
+
     .navigation { display: flex; align-items: center; gap: clamp(12px, 2.4vw, 33px); }
-    .navigation a { color: #52615b; text-decoration: none; font-size: 13px; font-weight: 600; white-space: nowrap; }
+
+    .navigation a { color: #535a57; text-decoration: none; font-size: 13px; font-weight: 600; white-space: nowrap; }
+
     .navigation a:hover, .navigation a:focus-visible { color: var(--vert); text-decoration: underline; text-underline-offset: 5px; }
 
     /* Mise en page et titres */
+
     .eyebrow { color: var(--vert); font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+
     h1, h2, h3, p { margin-top: 0; }
+
     h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.12; }
-    h1 { margin-bottom: 25px; font-size: clamp(52px, 6.6vw, 99px); letter-spacing: -.047em; }
+
+    h1 { margin-bottom: 25px; font-size: clamp(46px, 6vw, 82px); letter-spacing: -.047em; }
+
     h1 em { display: block; color: var(--vert); font-weight: 400; }
-    h2 { margin-bottom: 12px; font-size: clamp(34px, 4vw, 53px); letter-spacing: -.035em; }
+
+    h2 { margin-bottom: 12px; font-size: clamp(32px, 4vw, 47px); letter-spacing: -.035em; }
+
     h3 { font-size: 29px; }
+
     .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 30px; }
+
     .section-heading p { max-width: 460px; margin-bottom: 3px; color: var(--secondaire); }
+
     .section-space { padding-block: 87px; }
+
     .button { display: inline-flex; justify-content: center; align-items: center; min-height: 47px; padding: 11px 24px; border: 1px solid var(--vert-fonce); border-radius: 3px; background: var(--vert-fonce); color: white; font-size: 13px; font-weight: 650; text-decoration: none; transition: transform .2s, background .2s; }
+
     .button:hover { background: var(--vert); transform: translateY(-2px); }
+
     .button-outline { background: transparent; color: var(--vert-fonce); }
+
     .button-outline:hover { color: white; }
+
     .button.is-disabled { cursor: not-allowed; background: #a5aea7; border-color: #a5aea7; transform: none; }
 
     /* Accueil */
+
     .hero { display: grid; grid-template-columns: .86fr 1.14fr; align-items: center; gap: clamp(30px, 6vw, 90px); padding-block: 76px 85px; }
+
     .hero-text > p:not(.eyebrow) { max-width: 400px; margin-bottom: 28px; color: var(--secondaire); font-size: 16px; }
-    .hero-photo { height: clamp(380px, 48vw, 630px); box-shadow: 23px 23px 0 #e9eee7; }
+
+    .hero-photo { height: clamp(370px, 46vw, 585px); }
+
     .hero-footnote { display: flex; align-items: center; gap: 13px; margin-top: 32px; color: var(--secondaire); font-size: 12px; }
+
     .footnote-line { display: inline-block; width: 32px; height: 1px; background: var(--vert); }
 
     /* Emplacements photo : aucune icône d'image cassée si les fichiers sont absents. */
-    .image-shell { position: relative; overflow: hidden; isolation: isolate; background: #d9e6e0; }
+
+    .image-shell { position: relative; overflow: hidden; isolation: isolate; background: #e3e7e5; }
+
     .image-shell::before, .image-shell::after { position: absolute; content: ''; pointer-events: none; }
+
     .image-shell::before { inset: 0; z-index: -2; }
+
     .image-shell::after { z-index: -1; left: -10%; right: -10%; height: 45%; bottom: -12%; opacity: .7; clip-path: polygon(0 70%, 15% 45%, 31% 61%, 48% 34%, 67% 66%, 82% 43%, 100% 62%, 100% 100%, 0 100%); }
-    .image-shell[data-place="bretagne"]::before { background: radial-gradient(circle at 72% 27%, #fff6d5 0 6%, transparent 6.5%), linear-gradient(175deg, #d7e6e5 0 52%, #85adae 53% 70%, #4f8589 71% 100%); }
+
+    .image-shell[data-place="bretagne"]::before { background: radial-gradient(circle at 72% 27%, #fff6d5 0 6%, transparent 6.5%), linear-gradient(175deg, #d7e6e5 0 52%, #85adae 53% 70%, #39949b 71% 100%); }
+
     .image-shell[data-place="bretagne"]::after { background: #9daf9e; }
+
     .image-shell[data-place="japon"]::before { background: radial-gradient(circle at 74% 27%, #f8e6cf 0 9%, transparent 9.5%), linear-gradient(160deg, #efd9d1, #b1bbb6 63%, #758c84); }
+
     .image-shell[data-place="japon"]::after { background: #899895; }
-    .image-shell[data-place="canada"]::before { background: linear-gradient(170deg, #cfdfd8 0 48%, #92aaa0 49% 66%, #4d7369 67% 100%); }
-    .image-shell[data-place="canada"]::after { background: #577565; }
+
+    .image-shell[data-place="canada"]::before { background: linear-gradient(170deg, #cfdfd8 0 48%, #92aaa0 49% 66%, #084ebe 67% 100%); }
+
+    .image-shell[data-place="canada"]::after { background: #4d5d55; }
+
     .image-shell[data-place="newyork"]::before { background: linear-gradient(165deg, #e9d8c9, #c8c0b5 58%, #969b98); }
-    .image-shell[data-place="newyork"]::after { background: #8e958e; clip-path: polygon(0 35%, 10% 35%, 10% 10%, 25% 10%, 25% 50%, 35% 50%, 35% 0, 48% 0, 48% 40%, 58% 40%, 58% 18%, 72% 18%, 72% 47%, 82% 47%, 82% 26%, 100% 26%, 100% 100%, 0 100%); }
+
+    .image-shell[data-place="newyork"]::after { background: #414144; clip-path: polygon(0 35%, 10% 35%, 10% 10%, 25% 10%, 25% 50%, 35% 50%, 35% 0, 48% 0, 48% 40%, 58% 40%, 58% 18%, 72% 18%, 72% 47%, 82% 47%, 82% 26%, 100% 26%, 100% 100%, 0 100%); }
+
     .image-shell img { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s; }
+
     .image-shell.is-loaded img { opacity: 1; }
-    .photo-placeholder { position: absolute; z-index: 1; bottom: 18px; left: 19px; padding: 6px 10px; border-radius: 2px; background: rgba(255,255,255,.83); color: #385448; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+    .photo-placeholder { position: absolute; z-index: 1; bottom: 18px; left: 19px; padding: 6px 10px; border-radius: 2px; background: rgba(255,255,255,.83); color: #39495f; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
     .image-shell.is-loaded .photo-placeholder { display: none; }
 
     /* Cartes des albums */
+
     .albums-section { border-top: 1px solid var(--bordure); }
+
     .album-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 19px; }
-    .album-card { display: block; overflow: hidden; border: 1px solid var(--bordure); border-radius: 4px; background: white; text-decoration: none; transition: transform .2s, box-shadow .2s; }
-    .album-card:hover { transform: translateY(-5px); box-shadow: 0 16px 35px #1b3b3020; }
+
+    .album-card { display: block; overflow: hidden; border: 1px solid var(--bordure); border-radius: 2px; background: white; text-decoration: none; transition: border-color .2s; }
+
+    .album-card:hover { border-color: #adb9b5; }
+
     .album-card:focus-visible { outline: 3px solid var(--vert); outline-offset: 3px; }
+
     .album-image { width: 100%; aspect-ratio: 4 / 5; }
+
     .album-info { padding: 18px 19px 19px; }
+
     .album-info h3 { margin: 0 0 4px; font-size: 26px; }
+
     .album-info p { margin: 0; color: var(--secondaire); font-size: 12px; }
-    .album-arrow { float: right; color: var(--vert); font-size: 20px; }
+
+    .album-arrow { display: none; }
 
     /* Galerie filtrable */
-    .gallery-section { background: #f1f3ee; border-top: 1px solid var(--bordure); border-bottom: 1px solid var(--bordure); }
+
+    .gallery-section { background: #f4f4f0; border-top: 1px solid var(--bordure); border-bottom: 1px solid var(--bordure); }
+
     .gallery-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 26px; }
+
     .album-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
-    .album-tab { padding: 8px 15px; border: 1px solid #d6ddd6; border-radius: 30px; background: white; color: var(--secondaire); cursor: pointer; font-size: 13px; }
+
+    .album-tab { padding: 8px 15px; border: 1px solid #d5dad7; border-radius: 3px; background: white; color: var(--secondaire); cursor: pointer; font-size: 13px; }
+
     .album-tab:hover { border-color: var(--vert); color: var(--vert); }
+
     .album-tab[aria-pressed="true"] { background: var(--vert-fonce); border-color: var(--vert-fonce); color: white; }
+
     .gallery-count { color: var(--secondaire); font-size: 12px; white-space: nowrap; }
+
     .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 19px; }
+
     .photo-card { min-width: 0; }
+
     .photo-button { display: block; width: 100%; padding: 0; border: 0; background: none; text-align: left; cursor: zoom-in; }
+
     .photo-button:disabled { cursor: default; }
+
     .photo-button:focus-visible { outline: 3px solid var(--vert); outline-offset: 4px; }
-    .photo-frame { width: 100%; aspect-ratio: 4 / 3; border-radius: 3px; transition: filter .2s; }
-    .photo-button:not(:disabled):hover .photo-frame { filter: brightness(.9); }
+
+    .photo-frame { width: 100%; aspect-ratio: 4 / 3; border-radius: 2px; }
+
+    .photo-button:not(:disabled):hover .photo-frame { filter: brightness(.97); }
+
     .photo-caption { display: flex; justify-content: space-between; gap: 15px; margin-top: 10px; font-size: 13px; }
+
     .photo-caption small { color: var(--secondaire); font-size: 11px; }
+
     .photo-hint { margin: 22px 0 0; color: var(--secondaire); font-size: 12px; }
 
     /* À propos et contact */
-    .about-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(35px, 9vw, 140px); align-items: start; }
+
+    .about-layout { display: block; }
+    .about-layout > div { max-width: 760px; }
+
     .about-layout p { color: var(--secondaire); }
-    .about-quote { border-left: 2px solid #adc4b5; padding: 12px 0 12px 30px; color: var(--vert-fonce); font-family: var(--serif); font-size: clamp(24px, 3vw, 37px); line-height: 1.35; }
-    .contact-section { padding: 65px 0; background: #e6ece6; }
+
+    .about-quote { display: none; }
+
+    .contact-section { padding: 65px 0; background: #ecefea; }
+
     .contact-layout { display: flex; justify-content: space-between; align-items: center; gap: 25px; }
+
     .contact-layout h2 { margin-bottom: 9px; }
+
     .contact-layout p { margin: 0; max-width: 500px; color: var(--secondaire); }
+
     .contact-action { text-align: right; }
+
     .contact-note { display: block; margin-top: 8px; color: var(--secondaire); font-size: 11px; }
+
     .site-footer { padding: 26px 0; }
+
     .footer-inner { display: flex; justify-content: space-between; gap: 20px; color: var(--secondaire); font-size: 11px; }
+
     .footer-inner a { text-underline-offset: 3px; }
 
+/* Liens en bas de page */
+
+.footer-links {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px 22px;
+
+  margin-bottom: 20px;
+
+  font-size: 13px;
+
+}
+
+.footer-links a {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  text-decoration: none;
+
+  color: var(--texte);
+
+}
+
+.footer-links a:hover {
+
+  text-decoration: underline;
+
+}
+
+.footer-links svg {
+
+  width: 15px;
+
+  height: 15px;
+
+  flex-shrink: 0;
+
+  fill: currentColor;
+
+  opacity: 0.85;
+
+}
+
     /* Agrandissement des photos */
+
     .lightbox { width: min(1040px, 94vw); max-height: 94vh; padding: 15px; border: 0; border-radius: 4px; background: #fdfdfb; box-shadow: 0 30px 80px #0006; }
+
     .lightbox::backdrop { background: rgba(16, 28, 23, .84); }
+
     .lightbox img { display: block; max-width: 100%; max-height: 78vh; margin: auto; object-fit: contain; }
+
     .lightbox p { margin: 10px 4px 0; font-size: 13px; color: var(--secondaire); }
+
     .lightbox-close { float: right; margin-bottom: 10px; border: 0; background: transparent; color: var(--texte); cursor: pointer; font-size: 29px; line-height: 1; }
 
     @media (max-width: 900px) {
+
       .hero { grid-template-columns: 1fr 1fr; gap: 30px; }
+
       h1 { font-size: clamp(48px, 7vw, 70px); }
+
       .album-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+
       .album-image { aspect-ratio: 6 / 4; }
+
       .photo-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+
     }
+
     @media (max-width: 650px) {
+
       .container { width: min(100% - 32px, 1180px); }
+
       .header-inner { min-height: 64px; flex-wrap: wrap; padding-block: 11px; gap: 12px; }
+
       .navigation { width: 100%; overflow-x: auto; padding-bottom: 2px; gap: 20px; }
+
       .navigation a { font-size: 12px; }
+
       .hero { display: flex; flex-direction: column; align-items: stretch; padding-block: 48px 55px; }
+
       h1 { font-size: clamp(55px, 12vw, 80px); }
-      .hero-photo { height: 390px; box-shadow: 11px 11px 0 #e9eee7; }
+
+      .hero-photo { height: 370px; }
+
       .section-space { padding-block: 60px; }
+
       .section-heading, .gallery-toolbar, .contact-layout { align-items: start; flex-direction: column; }
+
       .section-heading { gap: 5px; }
+
       .album-grid { gap: 12px; }
+
       .album-info { padding: 12px; }
+
       .album-info h3 { font-size: 23px; }
+
       .album-image { aspect-ratio: 4 / 5; }
+
       .photo-grid { gap: 12px; }
+
       .photo-caption { display: block; }
+
       .photo-caption small { display: block; }
+
       .about-layout { grid-template-columns: 1fr; gap: 14px; }
+
       .contact-action { text-align: left; }
+
       .footer-inner { flex-direction: column; gap: 6px; }
+
     }
+
+
+
+    /* Easter egg : beaucoup de petits chats blancs sur fond bleu */
+    .cat-burst-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      overflow: hidden;
+      pointer-events: none;
+      animation: cat-layer-fade 2.2s ease-in forwards;
+    }
+    .cat-burst {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      line-height: 1;
+      font-size: var(--size);
+      user-select: none;
+      /* Rend tous les émojis de chats entièrement blancs */
+      filter: brightness(0) invert(1);
+      animation: cat-burst-fly var(--duration) ease-out var(--delay) both;
+      will-change: transform, opacity;
+    }
+    @keyframes cat-burst-fly {
+      0%   { opacity: 0; transform: translateY(35px) scale(.5) rotate(-20deg); }
+      15%  { opacity: 1; }
+      75%  { opacity: 1; }
+      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(var(--scale)) rotate(var(--rotation)); }
+    }
+    @keyframes cat-layer-fade {
+      0%, 82% { opacity: 1; }
+      100%    { opacity: 0; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
+
       html { scroll-behavior: auto; }
+
       *, *::before, *::after { transition-duration: .01ms !important; }
+
     }
+
     /* Masquer la galerie par défaut */
+
 #galerie {
+
   display: none;
+
 }
 
-/* Afficher la galerie quand on clique dessus */
+/* Afficher la galerie quand je clique dessus */
+
 #galerie:target {
+
   display: block;
+
 }
+
+    /* Page de bienvenue : photos nettes, texte lisible */
+    #bienvenue {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+      color: #fff;
+      background: #263e43;
+    }
+    .bienvenue-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0;
+      transition: opacity 1.1s ease;
+    }
+    .bienvenue-photo.is-active { opacity: 1; }
+    #bienvenue::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(15, 27, 30, .28), rgba(15, 27, 30, .55));
+      pointer-events: none;
+    }
+    .texte-bienvenue {
+      position: relative;
+      z-index: 1;
+      width: min(580px, calc(100% - 42px));
+      padding: 25px 14px;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, .22);
+    }
+    .texte-bienvenue h1 {
+      margin-bottom: 24px;
+      color: white;
+      font-size: clamp(43px, 7vw, 72px);
+      letter-spacing: -.025em;
+    }
+    .texte-bienvenue p {
+      margin-bottom: 30px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-style: italic;
+      font-size: clamp(15px, 2.3vw, 19px);
+      line-height: 1.9;
+    }
+    #entrer-site {
+      min-height: 45px;
+      padding: 10px 23px;
+      border: 1px solid rgba(255, 255, 255, .9);
+      border-radius: 2px;
+      background: #f9f8f4;
+      color: #263e43;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      text-shadow: none;
+    }
+    #entrer-site:hover, #entrer-site:focus-visible { background: #e9ede9; }
+    @media (prefers-reduced-motion: reduce) {
+      .bienvenue-photo { transition: none; }
+    }
+    
+/* Chats blancs sur fond bleu */
+.cat-burst-layer {
+  background: #254477;
+}
+
+.cat-burst {
+  filter: brightness(0) invert(1);
+}
+
   </style>
+
 </head>
+
 <body>
+
+<!-- Page de bienvenue -->
+
+<section id="bienvenue">
+
+  <img class="bienvenue-photo is-active" id="photo-accueil" alt="Photo de voyage" decoding="async" fetchpriority="high">
+  <img class="bienvenue-photo" id="photo-suivante" alt="" aria-hidden="true" decoding="async">
+
+  <div class="texte-bienvenue">
+
+    <h1>3 ans en images</h1>
+
+    <p>
+      100 chats = 100 %<br>
+      alors 1000 chats = 1000 %.
+    </p>
+
+    <button id="entrer-site" type="button">
+
+      Entrer sur le site →
+
+    </button>
+
+  </div>
+
+</section>
+
   <header class="site-header">
+
     <div class="container header-inner">
+
       <a class="brand" href="#accueil" aria-label="Retour à l'accueil">
+
         <span class="brand-mark">A</span>
+
         <span><span class="brand-name">Aurélien</span><span class="brand-note">Carnet photographique</span></span>
+
       </a>
+
       <nav class="navigation" aria-label="Navigation principale">
+
         <a href="#accueil">Accueil</a>
+
         <a href="#albums">Albums</a>
+
         <a href="#galerie">Photos</a>
+
         <a href="#apropos">À propos</a>
+
         <a href="#contact">Contact</a>
+
       </nav>
+
     </div>
+
   </header>
 
   <main>
+
     <section id="accueil" class="container hero">
+
       <div class="hero-text">
-        <p class="eyebrow">Le carnet photo d'Aurélien</p>
+
+        <p class="eyebrow">Le carnet photo d'Aurélien,</p>
+
+        <p class="eyebrow">C'est moi qui l'ai fait </p> 
+
         <h1>Été en <em>Bretagne.</em></h1>
-        <p>Des paysages, des voyages et des petits instants qu'on aimerait garder un peu plus longtemps.</p>
-        <a class="button" href="#albums">Découvrir les albums &nbsp; ↗</a>
+
+        <p>Quelques voyages mais avant tout la Bretagne.</p>
+
+        <a class="button" href="#albums">Découvrir les albums   ↗</a>
+
         <div class="hero-footnote"><span class="footnote-line"></span> Bretagne, Japon, Canada & New York</div>
+
       </div>
+
       <div class="image-shell hero-photo" data-place="bretagne" data-image="images/Bretagne 2026/0CC767A1-590B-47F0-9571-B8BC49FAE9ED_1_105_c.jpeg" data-alt="Photographie de couverture, Bretagne">
+
         <span class="photo-placeholder">Photo de couverture à ajouter</span>
+
       </div>
+
     </section>
 
     <section id="albums" class="albums-section section-space">
+
       <div class="container">
-        <p class="eyebrow">01 / Mes destinations</p>
+
+        <p class="eyebrow">01 / Albums</p>
+
         <div class="section-heading">
-          <h2>Des souvenirs d'ici<br>et d'ailleurs.</h2>
-          <p>La Bretagne à l'honneur, avec quelques escapades au Japon, au Canada et à New York. Chaque destination a sa petite collection.</p>
+
+          <h2>Mes albums photo</h2>
+
+          <p>Bretagne, Japon, Canada et New York. Les photos sont classées par voyage.</p>
+
         </div>
+
         <div class="album-grid">
+
           <a class="album-card" href="#galerie" data-open-album="bretagne">
+
             <div class="image-shell album-image" data-place="bretagne" data-image="images/Bretagne 2026/0CC767A1-590B-47F0-9571-B8BC49FAE9ED_1_105_c.jpeg" data-alt="Couverture de l'album Bretagne"><span class="photo-placeholder">Photo à ajouter</span></div>
+
             <div class="album-info"><span class="album-arrow" aria-hidden="true">↗</span><h3>Bretagne</h3><p>La mer, les étés, les souvenirs.</p></div>
+
           </a>
+
           <a class="album-card" href="#galerie" data-open-album="japon">
+
             <div class="image-shell album-image" data-place="japon" data-image="images/Japon 2026/P1068322.JPG" data-alt="Couverture de l'album Japon"><span class="photo-placeholder">Photo à ajouter</span></div>
-            <div class="album-info"><span class="album-arrow" aria-hidden="true">↗</span><h3>Japon</h3><p>Un autre horizon.</p></div>
+
+            <div class="album-info"><span class="album-arrow" aria-hidden="true">↗</span><h3>Japon</h3><p>Printemps 2026</p></div>
+
           </a>
+
           <a class="album-card" href="#galerie" data-open-album="canada">
+
             <div class="image-shell album-image" data-place="canada" data-image="images/Canada  2025-2026/4EC4808C-40EE-4F4E-8444-76CFE8E8D278_1_105_c.jpeg" data-alt="Couverture de l'album Canada"><span class="photo-placeholder">Photo à ajouter</span></div>
-            <div class="album-info"><span class="album-arrow" aria-hidden="true">↗</span><h3>Canada</h3><p>Des retrouvailles et des découvertes.</p></div>
+
+            <div class="album-info"><span class="album-arrow" aria-hidden="true">↗</span><h3>Canada</h3><p>2025–2026</p></div>
+
           </a>
+
           <a class="album-card" href="#galerie" data-open-album="newyork">
+
             <div class="image-shell album-image" data-place="newyork" data-image="images/New York 2025 /0EDC38A8-4155-42B2-A6CE-E0641F9F9CFB_1_105_c.jpeg" data-alt="Couverture de l'album New York"><span class="photo-placeholder">Photo à ajouter</span></div>
-            <div class="album-info"><span class="album-arrow" aria-hidden="true">↗</span><h3>New York</h3><p>La ville en images.</p></div>
+
+            <div class="album-info"><span class="album-arrow" aria-hidden="true">↗</span><h3>New York</h3><p>2025</p></div>
+
           </a>
+
         </div>
+
       </div>
+
     </section>
 
     <section id="galerie" class="gallery-section section-space">
+
       <div class="container">
-        <p class="eyebrow">02 / Galerie</p>
+
+        <p class="eyebrow">02 / Photos</p>
+
         <div class="section-heading">
+
           <div><h2 id="gallery-title">Bretagne</h2><p id="gallery-description">Mes images de Bretagne, entre paysages et moments partagés.</p></div>
+
         </div>
+
         <div class="gallery-toolbar">
+
           <div class="album-tabs" aria-label="Choisir un album">
+
             <button class="album-tab" type="button" data-album="bretagne" aria-pressed="true">Bretagne</button>
+
             <button class="album-tab" type="button" data-album="japon" aria-pressed="false">Japon</button>
+
             <button class="album-tab" type="button" data-album="canada" aria-pressed="false">Canada</button>
+
             <button class="album-tab" type="button" data-album="newyork" aria-pressed="false">New York</button>
+
           </div>
+
           <span class="gallery-count" id="gallery-count"></span>
+
         </div>
+
         <div class="photo-grid" id="photo-grid"></div>
-        <p class="photo-hint">Les cadres indiqués « Photo à ajouter » se rempliront automatiquement dès que les fichiers correspondants seront déposés dans le dossier <code>images</code>.</p>
+
+        <p class="photo-hint">Les images seront affichées ici.</p>
+
         <noscript><p>Activez JavaScript pour afficher et parcourir les albums.</p></noscript>
+
       </div>
+
     </section>
 
     <section id="apropos" class="section-space">
+
       <div class="container about-layout">
+
         <div>
+
           <p class="eyebrow">03 / À propos</p>
+
           <h2>Bonjour, moi c'est Aurélien.</h2>
-          <p>J'ai créé ce petit coin d'Internet pour réunir mes photographies et retrouver facilement mes souvenirs de voyage. La Bretagne occupe une place particulière dans cette collection, mais le carnet s'ouvre aussi sur d'autres destinations.</p>
-          <p>Pas besoin d'en faire trop : quelques images, des lieux qui comptent et le plaisir de les partager avec ma famille et mes proches.</p>
+
+          <p>J'ai créé ce site dans le cadre du Cours d'Adrien Cloutier.  L'objectif est de partager mes photographies. La Bretagne occupe une place particulière dans cette collection. C'est vrai que c'est vraiment chouette aussi.</p>
+
         </div>
-        <div class="about-quote">« Parce que les plus beaux souvenirs méritent parfois leur propre album. »</div>
+
       </div>
+
     </section>
 
     <section id="contact" class="contact-section">
+
       <div class="container contact-layout">
+
         <div>
+
           <p class="eyebrow">04 / Contact</p>
+
           <h2>On garde le contact ?</h2>
-          <p>Une question, un souvenir à partager ou simplement envie de m'écrire ? Un petit message fait toujours plaisir.</p>
+
+          <p>Une question, un souvenir? </p>
+
         </div>
+
         <div class="contact-action">
-          <a id="contact-link" class="button" href="mailto:aurelienchenepr@gmail.com">Me contacter</a>
-          <span id="contact-note" class="contact-note">Le contact sera activé lorsque l'adresse e-mail sera renseignée.</span>
+
+          <a id="contact-link" class="button" href="mailto:aurelienchenepro@gmail.com">Me contacter</a>
+
+          <span id="contact-note" class="contact-note"></span>
         </div>
+
       </div>
+
     </section>
+
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <span>© <span id="year">2026</span> Aurélien · Carnet photographique personnel</span>
-      <span>Projet POL-6078 · Modèle initial : <a href="https://html5up.net" target="_blank" rel="noopener noreferrer">HTML5 UP</a> (<a href="https://html5up.net/license" target="_blank" rel="noopener noreferrer">CCA 3.0</a>)</span>
+<footer class="site-footer">
+
+  <div class="container">
+
+    <!-- Mes liens -->
+
+    <div class="footer-links">
+
+  <a href="https://www.instagram.com/aurelien_chenefr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+      <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.25 1.45a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2A2.8 2.8 0 1 0 12 14.8 2.8 2.8 0 0 0 12 9.2Z"/>
+
+    </svg>
+
+    <span>Instagram</span>
+
+  </a>
+
+  <a href="https://www.linkedin.com/in/aur%C3%A9lien-ch%C3%AAne/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+      <path d="M4.98 3.5A2.48 2.48 0 1 1 5 8.46 2.48 2.48 0 0 1 4.98 3.5ZM3 9h4v12H3V9Zm6 0h3.83v1.64h.05c.53-1.01 1.84-2.08 3.8-2.08 4.07 0 4.82 2.68 4.82 6.16V21h-4v-5.53c0-1.32-.02-3.02-1.84-3.02-1.85 0-2.14 1.44-2.14 2.93V21H9V9Z"/>
+
+    </svg>
+
+    <span>LinkedIn</span>
+
+  </a>
+
+  <a href="https://www.facebook.com/aurelien.chn.5" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+      <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.87.24-1.46 1.5-1.46H16.7V5.02c-.3-.04-1.33-.12-2.53-.12-2.5 0-4.22 1.53-4.22 4.34V11H7.2v3h2.75v8h3.55Z"/>
+
+    </svg>
+
+    <span>Facebook</span>
+
+  </a>
+
+  <a href="images/CV/CV_Aurelien_Chene.pdf.pdf" target="_blank" rel="noopener noreferrer" aria-label="Mon CV">
+
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+      <path d="M6 2h8l4 4v16H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm7 1.5V7h3.5L13 3.5ZM8 10h8v1.8H8V10Zm0 4h8v1.8H8V14Zm0 4h5v1.8H8V18Z"/>
+
+    </svg>
+
+    <span>Mon CV</span>
+
+  </a>
+
+  <a href="mailto:aurelienchenepro@gmail.com" aria-label="E-mail personnel">
+
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+      <path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.4l9 5.6 9-5.6V7H3Zm18 10V9.75l-8.47 5.27a1 1 0 0 1-1.06 0L3 9.75V17h18Z"/>
+
+    </svg>
+
+    <span>E-mail perso</span>
+
+  </a>
+
+  <a href="mailto:aurelien.chene.1@ulaval.ca" aria-label="E-mail universitaire">
+
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+      <path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 2v.4l9 5.6 9-5.6V7H3Zm18 10V9.75l-8.47 5.27a1 1 0 0 1-1.06 0L3 9.75V17h18Z"/>
+
+    </svg>
+
+    <span>E-mail ulaval</span>
+
+  </a>
+
+</div>
+
+    <!-- Bas de page -->
+
+    <div class="footer-inner">
+
+      <span>© <span id="year">2026</span> Aurélien Chêne</span>
+
     </div>
-  </footer>
+
+  </div>
+
+</footer>
 
   <dialog id="lightbox" class="lightbox" aria-label="Photographie agrandie">
+
     <button id="lightbox-close" class="lightbox-close" type="button" aria-label="Fermer la photo">×</button>
+
     <img id="lightbox-image" alt="">
+
     <p id="lightbox-caption"></p>
+
   </dialog>
 
   <script>
-    // PERSONNALISATION FACILE : renseigner l'adresse pour activer le bouton Contact.
-    const CONTACT_EMAIL = "aurelienchenepr@gmail.com";
 
-    // PHOTOS : déposer ces fichiers dans le dossier images/ du dépôt GitHub.
-    // Pour changer une légende, modifier le texte placé après « caption ».
-    // Pour ajouter une image, dupliquer une ligne dans l'album correspondant.
+    // Bouton Contact.
+
+const CONTACT_EMAIL = "aurelienchenepro@gmail.com";
+
+    // Albums photos askip 
+
     const albums = {
+
       bretagne: {
+
         titre: "Bretagne",
+
         description: "Bretagne été 2026.",
+
         photos: [
-          { src: "images/Bretagne 2026/338F5C29-B810-4828-BD51-EC0382A38895_1_105_c.jpeg", caption: "Bretagne · Photo 01" },
-          { src: "images/Bretagne 2026/8D13A3C6-2519-4553-B829-2322BDB43EC6_1_105_c.jpeg", caption: "Bretagne · Photo 02" },
-          { src: "images/Bretagne 2026/F1F698F8-A83F-44CD-A0E9-3812093AFBD8_1_105_c.jpeg", caption: "Bretagne · Photo 03" },
-          { src: "images/Bretagne 2026/DD040946-954A-4F08-B4A7-78C84FFB0E30_1_105_c.jpeg", caption: "Bretagne · Photo 04" },
-          { src: "images/Bretagne 2026/6DCA3A22-9C45-4D6B-B48B-DC9400AD2C1F_1_105_c.jpeg", caption: "Bretagne · Photo 05" },
-          { src: "images/Bretagne 2026/65D6E3EB-97BD-4E14-BB52-2BC6065AA927_1_105_c.jpeg", caption: "Bretagne · Photo 06" },
-          { src: "images/Bretagne 2026/3EB3BEF5-F776-4F8D-BBC7-8B05891BEE63_1_105_c.jpeg", caption: "Bretagne · Photo 07" },
-          { src: "images/Bretagne 2026/0CC767A1-590B-47F0-9571-B8BC49FAE9ED_1_105_c.jpeg", caption: "Bretagne · Photo 08" },
-          { src: "images/Bretagne 2026/ECD1AC64-F14D-46CF-95F9-BFBA1B93C7E4_1_105_c.jpeg", caption: "Bretagne · Photo 09" }
+
+          { src: "images/Bretagne 2026/338F5C29-B810-4828-BD51-EC0382A38895_1_105_c.jpeg", caption: "Bretagne · Moonbeam IV" },
+
+          { src: "images/Bretagne 2026/8D13A3C6-2519-4553-B829-2322BDB43EC6_1_105_c.jpeg", caption: "Bretagne · Fou de bassan" },
+
+          { src: "images/Bretagne 2026/F1F698F8-A83F-44CD-A0E9-3812093AFBD8_1_105_c.jpeg", caption: "Bretagne · Port du Chateau" },
+
+          { src: "images/Bretagne 2026/DD040946-954A-4F08-B4A7-78C84FFB0E30_1_105_c.jpeg", caption: "Bretagne · Coucher de soleil" },
+
+          { src: "images/Bretagne 2026/6DCA3A22-9C45-4D6B-B48B-DC9400AD2C1F_1_105_c.jpeg", caption: "Bretagne · Moonbeam IV au spi" },
+
+          { src: "images/Bretagne 2026/65D6E3EB-97BD-4E14-BB52-2BC6065AA927_1_105_c.jpeg", caption: "Bretagne ·Pilot sur miroir d'eau " },
+
+          { src: "images/Bretagne 2026/3EB3BEF5-F776-4F8D-BBC7-8B05891BEE63_1_105_c.jpeg", caption: "Bretagne · La Recouvrance " },
+
+          { src: "images/Bretagne 2026/0CC767A1-590B-47F0-9571-B8BC49FAE9ED_1_105_c.jpeg", caption: "Bretagne . Régate sur Rade de Brest " },
+
+          { src: "images/Bretagne 2026/ECD1AC64-F14D-46CF-95F9-BFBA1B93C7E4_1_105_c.jpeg", caption: "Bretagne · Marikita et Moombean" }
+
         ]
+
       },
+
       japon: {
+
         titre: "Japon",
+
         description: "Tokyo, printemps 2026",
+
         photos: [
-          { src: "images/Japon 2026/P1058117.JPG", caption: "Japon · Photo 01" },
-          { src: "images/Japon 2026/P1057565.JPG", caption: "Japon · Photo 02" },
-          { src: "images/Japon 2026/P1047166.JPG", caption: "Japon · Photo 03" },
-          { src: "images/Japon 2026/P1047127.JPG", caption: "Japon · Photo 04" },
-          { src: "images/Japon 2026/P1046615.JPG", caption: "Japon · Photo 05" },
-          { src: "images/Japon 2026/P1046585.JPG", caption: "Japon · Photo 06" },
-          { src: "images/Japon 2026/P1046525.JPG", caption: "Japon · Photo 07" },
-          { src: "images/Japon 2026/P1046314.JPG", caption: "Japon · Photo 08" },
-          { src: "images/Japon 2026/P1046316.JPG", caption: "Japon · Photo 09" },
-          { src: "images/Japon 2026/P1046404.JPG", caption: "Japon · Photo 10" },
+
+          { src: "images/Japon 2026/P1058117.JPG", caption: "Japon · Publicité niponne" },
+
+          { src: "images/Japon 2026/P1057565.JPG", caption: "Japon · Home run" },
+
+          { src: "images/Japon 2026/P1047166.JPG", caption: "Japon · Sanja Matsuri 2025" },
+
+          { src: "images/Japon 2026/P1047127.JPG", caption: "Japon · Temple cliché" },
+
+          { src: "images/Japon 2026/P1046615.JPG", caption: "Japon · Shinjuku, Shinjuku " },
+
+          { src: "images/Japon 2026/P1046585.JPG", caption: "Japon · Ils sont fous ces japonais" },
+
+          { src: "images/Japon 2026/P1046525.JPG", caption: "Japon · Beau bébé" },
+
+          { src: "images/Japon 2026/P1046314.JPG", caption: "Japon · Et ils vécurent heureux" },
+
+          { src: "images/Japon 2026/P1046316.JPG", caption: "Japon · Porte Tori" },
+
+          { src: "images/Japon 2026/P1046404.JPG", caption: "Japon · la tour Eiffel mais à Tokyo" },
+
         ]
+
       },
+
       canada: {
+
         titre: "Canada",
+
         description: "C'est beau mais c'est grand.",
+
         photos: [
-          { src: "images/Canada  2025-2026/0CF68519-4783-43ED-826D-2A37891962B0_1_105_c.jpeg", caption: "Canada · Photo 01" },
-          { src: "images/Canada  2025-2026/1EF208CF-36FD-449D-A1E1-3399BD7DB105_1_105_c.jpeg", caption: "Canada · Photo 02" },
-          { src: "images/Canada  2025-2026/4EC4808C-40EE-4F4E-8444-76CFE8E8D278_1_105_c.jpeg", caption: "Canada · Photo 03" },
-          { src: "images/Canada  2025-2026/52BB2F31-183B-4AFD-8820-DDF0FF46ED52_1_105_c.jpeg", caption: "Canada · Photo 04" },
-          { src: "images/Canada  2025-2026/328FBFA3-71DB-4132-AD06-18FCE63E2A21_1_105_c.jpeg", caption: "Canada · Photo 05" },
-          { src: "images/Canada  2025-2026/881A3BF7-96F8-448B-AEB4-EAB702DAFCF7_1_105_c.jpeg", caption: "Canada · Photo 06" },
-          { src: "images/Canada  2025-2026/122633B3-2AD0-4E8C-B7B8-9068C9B5DBB0_1_105_c.jpeg", caption: "Canada · Photo 07" },
-          { src: "images/Canada  2025-2026/491042FF-27C3-4C4C-A8D5-2A102B65626C_1_105_c.jpeg", caption: "Canada · Photo 08" },
-          { src: "images/Canada  2025-2026/P1046217.JPG", caption: "Canada · Photo 09" }
+
+          { src: "images/Canada  2025-2026/0CF68519-4783-43ED-826D-2A37891962B0_1_105_c.jpeg", caption: "Canada · Ottawa" },
+
+          { src: "images/Canada  2025-2026/1EF208CF-36FD-449D-A1E1-3399BD7DB105_1_105_c.jpeg", caption: "Canada · Acropole des drivers" },
+
+          { src: "images/Canada  2025-2026/4EC4808C-40EE-4F4E-8444-76CFE8E8D278_1_105_c.jpeg", caption: "Canada · Toronto skyline" },
+
+          { src: "images/Canada  2025-2026/52BB2F31-183B-4AFD-8820-DDF0FF46ED52_1_105_c.jpeg", caption: "Canada · Musée comptemporain d'Ottawa" },
+
+          { src: "images/Canada  2025-2026/328FBFA3-71DB-4132-AD06-18FCE63E2A21_1_105_c.jpeg", caption: "Canada · Montréal 2023" },
+
+          { src: "images/Canada  2025-2026/881A3BF7-96F8-448B-AEB4-EAB702DAFCF7_1_105_c.jpeg", caption: "Canada · Coin! " },
+
+          { src: "images/Canada  2025-2026/122633B3-2AD0-4E8C-B7B8-9068C9B5DBB0_1_105_c.jpeg", caption: "Canada · Brrrr" },
+
+          { src: "images/Canada  2025-2026/491042FF-27C3-4C4C-A8D5-2A102B65626C_1_105_c.jpeg", caption: "Canada · voilà" },
+
+          { src: "images/Canada  2025-2026/P1046217.JPG", caption: "Canada · Belle lune" }
+
         ]
+
       },
+
       newyork: {
+
         titre: "New York",
+
         description: "Quelques images de New York, au fil des rues et des découvertes.",
+
         photos: [
-          { src: "images/New York 2025 /41F64855-B18E-4054-AD10-01F98C1D2E43_1_105_c.jpeg", caption: "New York · Photo 01" },
-          { src: "images/New York 2025 /4750FBC9-8410-4178-B5B4-5DAA6C40A553_1_105_c.jpeg", caption: "New York · Photo 02" },
-          { src: "images/New York 2025 /0026196C-3F79-42F8-9EC7-72CC8731D86B_1_201_a.jpeg", caption: "New York · Photo 03" },
-          { src: "images/New York 2025 /E8850962-CC1A-43DD-A531-9159687DBDC1_1_105_c.jpeg", caption: "New York · Photo 04" }
+
+          { src: "images/New York 2025 /41F64855-B18E-4054-AD10-01F98C1D2E43_1_105_c.jpeg", caption: "New York · New Yooooork" },
+
+          { src: "images/New York 2025 /4750FBC9-8410-4178-B5B4-5DAA6C40A553_1_105_c.jpeg", caption: "New York · National Model United Nations 2025" },
+
+          { src: "images/New York 2025 /0026196C-3F79-42F8-9EC7-72CC8731D86B_1_201_a.jpeg", caption: "New York · Amazing Grace" },
+
+          { src: "images/New York 2025 /E8850962-CC1A-43DD-A531-9159687DBDC1_1_105_c.jpeg", caption: "New York · Cliché" }
+
         ]
+
       }
+
     };
 
     function placeImage(frame, path, alternative, onSuccess) {
+
       const photo = document.createElement("img");
+
       photo.alt = alternative;
+
       photo.loading = frame.classList.contains("hero-photo") ? "eager" : "lazy";
+
       photo.decoding = "async";
+      if (frame.classList.contains("hero-photo")) {
+        photo.fetchPriority = "high";
+      }
+
       photo.addEventListener("load", () => {
+
         frame.classList.add("is-loaded");
+
         if (onSuccess) onSuccess();
+
       });
+
       photo.addEventListener("error", () => photo.remove());
+
       frame.appendChild(photo);
+
       photo.src = path;
+
     }
 
     document.querySelectorAll(".image-shell[data-image]").forEach(frame => {
+
       placeImage(frame, frame.dataset.image, frame.dataset.alt || "Photographie");
+
     });
 
     const grid = document.getElementById("photo-grid");
+
     const modal = document.getElementById("lightbox");
+
     const modalImage = document.getElementById("lightbox-image");
+
     const modalCaption = document.getElementById("lightbox-caption");
 
     function showAlbum(name) {
+
       const album = albums[name];
+
       if (!album) return;
+
       document.getElementById("gallery-title").textContent = album.titre;
+
       document.getElementById("gallery-description").textContent = album.description;
+
       document.getElementById("gallery-count").textContent = album.photos.length + " emplacements photo";
+
       document.querySelectorAll(".album-tab").forEach(button => {
+
         button.setAttribute("aria-pressed", String(button.dataset.album === name));
+
       });
+
       grid.replaceChildren();
 
       album.photos.forEach((item, index) => {
+
         const card = document.createElement("article");
+
         card.className = "photo-card";
+
         const button = document.createElement("button");
+
         button.type = "button";
+
         button.className = "photo-button";
+
         button.disabled = true;
+
         button.setAttribute("aria-label", "Agrandir : " + item.caption);
+
         const frame = document.createElement("div");
+
         frame.className = "image-shell photo-frame";
+
         frame.dataset.place = name;
+
         const placeholder = document.createElement("span");
+
         placeholder.className = "photo-placeholder";
+
         placeholder.textContent = "Photo à ajouter";
+
         frame.appendChild(placeholder);
+
         placeImage(frame, item.src, item.caption, () => { button.disabled = false; });
+
         button.appendChild(frame);
+
         button.addEventListener("click", () => {
+
           modalImage.src = item.src;
+
           modalImage.alt = item.caption;
+
           modalCaption.textContent = item.caption;
+
           modal.showModal();
+
         });
+
         const legend = document.createElement("div");
+
         legend.className = "photo-caption";
+
         const text = document.createElement("span");
+
         text.textContent = item.caption;
+
         const number = document.createElement("small");
+
         number.textContent = String(index + 1).padStart(2, "0") + " / " + String(album.photos.length).padStart(2, "0");
+
         legend.append(text, number);
+
         card.append(button, legend);
+
         grid.appendChild(card);
+
       });
+
     }
 
     document.querySelectorAll(".album-tab").forEach(button => {
+
       button.addEventListener("click", () => showAlbum(button.dataset.album));
+
     });
+
     document.querySelectorAll("[data-open-album]").forEach(link => {
+
       link.addEventListener("click", () => showAlbum(link.dataset.openAlbum));
+
     });
+
     document.getElementById("lightbox-close").addEventListener("click", () => modal.close());
+
     modal.addEventListener("click", event => { if (event.target === modal) modal.close(); });
+
     modal.addEventListener("close", () => modalImage.removeAttribute("src"));
 
     if (CONTACT_EMAIL.trim()) {
+
       const contact = document.getElementById("contact-link");
+
       contact.href = "mailto:" + CONTACT_EMAIL.trim();
+
       contact.textContent = "M'envoyer un e-mail ↗";
+
       contact.removeAttribute("aria-disabled");
+
       contact.classList.remove("is-disabled");
+
       document.getElementById("contact-note").textContent = "";
+
     }
+
     document.getElementById("year").textContent = new Date().getFullYear();
+
     // Créer une galerie avec toutes les photos
+
 albums.toutes = {
+
   titre: "Toutes les photos",
+
   description: "Bretagne, Japon, Canada et New York.",
+
   photos: Object.values(albums).flatMap(album => album.photos)
+
 };
 
 // Cacher la galerie au démarrage
+
 const galerie = document.getElementById("galerie");
+
 galerie.style.display = "none";
 
 // Afficher la galerie quand on clique sur un album
+
 document.querySelectorAll(".album-card").forEach(carte => {
+
   carte.addEventListener("click", () => {
+
     galerie.style.display = "block";
+
   });
+
 });
 
 // Afficher toutes les photos avec le bouton Photos
+
 document.querySelector('.navigation a[href="#galerie"]').addEventListener("click", () => {
+
   showAlbum("toutes");
+
   galerie.style.display = "block";
+
 });
 
 // Cacher la galerie quand on revient aux autres rubriques
+
 document.querySelectorAll('a[href^="#"]:not([href="#galerie"])').forEach(lien => {
+
   lien.addEventListener("click", () => {
+
     galerie.style.display = "none";
+
+  });
+
+});
+
+// Diaporama de bienvenue : les images suivantes sont chargées avant d'être affichées.
+// Pour une image vraiment nette sur grand écran, utiliser ici une photo originale haute résolution.
+const photosAccueil = [
+  albums.bretagne.photos[0].src,
+  albums.japon.photos[0].src,
+  albums.canada.photos[0].src,
+  albums.newyork.photos[0].src
+];
+
+const bienvenue = document.getElementById("bienvenue");
+const imagesBienvenue = [
+  document.getElementById("photo-accueil"),
+  document.getElementById("photo-suivante")
+];
+let imageVisible = 0;
+let numeroPhoto = 0;
+let diaporamaTermine = false;
+
+imagesBienvenue[0].src = photosAccueil[0];
+document.body.style.overflow = "hidden";
+
+function afficherPhotoSuivante() {
+  const prochaine = (numeroPhoto + 1) % photosAccueil.length;
+  const imageChargee = new Image();
+
+  imageChargee.onload = () => {
+    if (diaporamaTermine) return;
+    const nouvelleImage = 1 - imageVisible;
+    const imageAvant = imagesBienvenue[imageVisible];
+    const imageApres = imagesBienvenue[nouvelleImage];
+
+    imageApres.src = imageChargee.src;
+    imageApres.classList.add("is-active");
+    imageAvant.classList.remove("is-active");
+    imageVisible = nouvelleImage;
+    numeroPhoto = prochaine;
+  };
+
+  imageChargee.src = photosAccueil[prochaine];
+}
+
+const diaporama = window.setInterval(afficherPhotoSuivante, 4500);
+
+// Petit avertissement dans la console si une photo du diaporama est trop petite.
+// Une photo exportée en basse définition ne peut pas devenir nette uniquement avec du CSS.
+imagesBienvenue.forEach(image => {
+  image.addEventListener("load", () => {
+    const largeurSouhaitee = Math.min(window.innerWidth * window.devicePixelRatio, 2000);
+    if (image.naturalWidth < largeurSouhaitee * 0.7) {
+      console.info("Photo de bienvenue assez petite pour un grand écran :", image.src,
+                   image.naturalWidth + " × " + image.naturalHeight);
+    }
   });
 });
-  </script>
+
+
+function lancerPluieDeChats() {
+  const couche = document.createElement("div");
+  couche.className = "cat-burst-layer";
+  document.body.appendChild(couche);
+
+  const chats = ["🐈", "🐈‍⬛", "🐱"];
+  // Davantage de chats sur les grands écrans, un peu moins sur téléphone.
+  const total = window.innerWidth < 650 ? 180 : 320;
+
+  for (let i = 0; i < total; i++) {
+    const chat = document.createElement("span");
+    chat.className = "cat-burst";
+    chat.textContent = chats[i % chats.length];
+    chat.setAttribute("aria-hidden", "true");
+
+    chat.style.setProperty("--x", `${Math.random() * 100}%`);
+    chat.style.setProperty("--y", `${Math.random() * 100}%`);
+    chat.style.setProperty("--size", `${18 + Math.random() * 28}px`);
+    chat.style.setProperty("--dx", `${(Math.random() - .5) * 260}px`);
+    chat.style.setProperty("--dy", `${-80 - Math.random() * 200}px`);
+    chat.style.setProperty("--rotation", `${(Math.random() - .5) * 400}deg`);
+    chat.style.setProperty("--scale", (0.7 + Math.random() * 1.2).toFixed(2));
+    chat.style.setProperty("--delay", `${Math.random() * 750}ms`);
+    chat.style.setProperty("--duration", `${2500 + Math.random() * 800}ms`);
+
+    couche.appendChild(chat);
+  }
+
+  window.setTimeout(() => couche.remove(), 4250);
+}
+
+document.getElementById("entrer-site").addEventListener("click", () => {
+  lancerPluieDeChats();
+  diaporamaTermine = true;
+  window.clearInterval(diaporama);
+  bienvenue.remove();
+  document.body.style.overflow = "";
+  window.scrollTo(0, 0);
+});
+
+</script>
+
 </body>
+
 </html>
