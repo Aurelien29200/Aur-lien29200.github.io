@@ -1,193 +1,492 @@
 <!doctype html>
 <!--
-	Read Only by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Été en Bretagne | Site photographique d'Aurélien
+  Adaptation personnelle du modèle « Read Only » de HTML5 UP.
+  Crédit du modèle original : html5up.net | @ajlkn
+  Licence du modèle original : CCA 3.0 (html5up.net/license)
 -->
-<html>
-  <head>
-    <title>Ce qui va apparaître dans la tab de votre site</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, user-scalable=no"
-    />
-    <link rel="stylesheet" href="assets/css/main.css" />
-  </head>
-  <body class="is-preload">
-    <!-- Header -->
-    <section id="header">
-      <header>
-        <span class="image avatar"
-          ><img src="images/portrait.png" alt=""
-        /></span>
-        <h1 id="logo"><a href="#">VOTRE NOM</a></h1>
-        <p>
-          Une courte description de vous<br />
-          Continuer la courte description
-        </p>
-      </header>
-      <nav id="nav">
-        <ul>
-          <li><a href="#one" class="active">À propos</a></li>
-          <li><a href="#two">Mon travail</a></li>
-          <li><a href="#three">Mon CV</a></li>
-          <li><a href="#four">Contact</a></li>
-        </ul>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Le carnet photographique d'Aurélien : Bretagne, Japon, Canada et New York.">
+  <meta name="theme-color" content="#faf9f6">
+  <title>Été en Bretagne | Aurélien</title>
+  <style>
+    :root {
+      --fond: #5b5a5775;
+      --blanc: #ffffff;
+      --texte: oklab(24.575% 0.00181 -0.08425);
+      --secondaire: #696973;
+      --vert: #33374f;
+      --vert-fonce: #441b23;
+      --bordure: #e8e9e3;
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--texte); background: var(--fond); font-family: var(--sans); line-height: 1.65; }
+    a { color: inherit; }
+    button { font: inherit; }
+    img { max-width: 100%; }
+    ::selection { background: #dce8df; }
+    .container { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+    section[id] { scroll-margin-top: 100px; }
+
+    /* Navigation */
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(250, 249, 246, .96); border-bottom: 1px solid var(--bordure); backdrop-filter: blur(12px); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 78px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; white-space: nowrap; }
+    .brand-mark { display: grid; place-items: center; width: 39px; height: 39px; border: 1px solid var(--vert); border-radius: 50%; color: var(--vert); font-family: var(--serif); font-size: 23px; }
+    .brand-name { display: block; font-family: var(--serif); font-size: 19px; line-height: 1.15; }
+    .brand-note { display: block; color: var(--secondaire); font-size: 10px; letter-spacing: .17em; text-transform: uppercase; }
+    .navigation { display: flex; align-items: center; gap: clamp(12px, 2.4vw, 33px); }
+    .navigation a { color: #52615b; text-decoration: none; font-size: 13px; font-weight: 600; white-space: nowrap; }
+    .navigation a:hover, .navigation a:focus-visible { color: var(--vert); text-decoration: underline; text-underline-offset: 5px; }
+
+    /* Mise en page et titres */
+    .eyebrow { color: var(--vert); font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.12; }
+    h1 { margin-bottom: 25px; font-size: clamp(52px, 6.6vw, 99px); letter-spacing: -.047em; }
+    h1 em { display: block; color: var(--vert); font-weight: 400; }
+    h2 { margin-bottom: 12px; font-size: clamp(34px, 4vw, 53px); letter-spacing: -.035em; }
+    h3 { font-size: 29px; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 30px; }
+    .section-heading p { max-width: 460px; margin-bottom: 3px; color: var(--secondaire); }
+    .section-space { padding-block: 87px; }
+    .button { display: inline-flex; justify-content: center; align-items: center; min-height: 47px; padding: 11px 24px; border: 1px solid var(--vert-fonce); border-radius: 3px; background: var(--vert-fonce); color: white; font-size: 13px; font-weight: 650; text-decoration: none; transition: transform .2s, background .2s; }
+    .button:hover { background: var(--vert); transform: translateY(-2px); }
+    .button-outline { background: transparent; color: var(--vert-fonce); }
+    .button-outline:hover { color: white; }
+    .button.is-disabled { cursor: not-allowed; background: #a5aea7; border-color: #a5aea7; transform: none; }
+
+    /* Accueil */
+    .hero { display: grid; grid-template-columns: .86fr 1.14fr; align-items: center; gap: clamp(30px, 6vw, 90px); padding-block: 76px 85px; }
+    .hero-text > p:not(.eyebrow) { max-width: 400px; margin-bottom: 28px; color: var(--secondaire); font-size: 16px; }
+    .hero-photo { height: clamp(380px, 48vw, 630px); box-shadow: 23px 23px 0 #e9eee7; }
+    .hero-footnote { display: flex; align-items: center; gap: 13px; margin-top: 32px; color: var(--secondaire); font-size: 12px; }
+    .footnote-line { display: inline-block; width: 32px; height: 1px; background: var(--vert); }
+
+    /* Emplacements photo : aucune icône d'image cassée si les fichiers sont absents. */
+    .image-shell { position: relative; overflow: hidden; isolation: isolate; background: #d9e6e0; }
+    .image-shell::before, .image-shell::after { position: absolute; content: ''; pointer-events: none; }
+    .image-shell::before { inset: 0; z-index: -2; }
+    .image-shell::after { z-index: -1; left: -10%; right: -10%; height: 45%; bottom: -12%; opacity: .7; clip-path: polygon(0 70%, 15% 45%, 31% 61%, 48% 34%, 67% 66%, 82% 43%, 100% 62%, 100% 100%, 0 100%); }
+    .image-shell[data-place="bretagne"]::before { background: radial-gradient(circle at 72% 27%, #fff6d5 0 6%, transparent 6.5%), linear-gradient(175deg, #d7e6e5 0 52%, #85adae 53% 70%, #4f8589 71% 100%); }
+    .image-shell[data-place="bretagne"]::after { background: #9daf9e; }
+    .image-shell[data-place="japon"]::before { background: radial-gradient(circle at 74% 27%, #f8e6cf 0 9%, transparent 9.5%), linear-gradient(160deg, #efd9d1, #b1bbb6 63%, #758c84); }
+    .image-shell[data-place="japon"]::after { background: #899895; }
+    .image-shell[data-place="canada"]::before { background: linear-gradient(170deg, #cfdfd8 0 48%, #92aaa0 49% 66%, #4d7369 67% 100%); }
+    .image-shell[data-place="canada"]::after { background: #577565; }
+    .image-shell[data-place="newyork"]::before { background: linear-gradient(165deg, #e9d8c9, #c8c0b5 58%, #969b98); }
+    .image-shell[data-place="newyork"]::after { background: #8e958e; clip-path: polygon(0 35%, 10% 35%, 10% 10%, 25% 10%, 25% 50%, 35% 50%, 35% 0, 48% 0, 48% 40%, 58% 40%, 58% 18%, 72% 18%, 72% 47%, 82% 47%, 82% 26%, 100% 26%, 100% 100%, 0 100%); }
+    .image-shell img { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s; }
+    .image-shell.is-loaded img { opacity: 1; }
+    .photo-placeholder { position: absolute; z-index: 1; bottom: 18px; left: 19px; padding: 6px 10px; border-radius: 2px; background: rgba(255,255,255,.83); color: #385448; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .image-shell.is-loaded .photo-placeholder { display: none; }
+
+    /* Cartes des albums */
+    .albums-section { border-top: 1px solid var(--bordure); }
+    .album-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 19px; }
+    .album-card { display: block; overflow: hidden; border: 1px solid var(--bordure); border-radius: 4px; background: white; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+    .album-card:hover { transform: translateY(-5px); box-shadow: 0 16px 35px #1b3b3020; }
+    .album-card:focus-visible { outline: 3px solid var(--vert); outline-offset: 3px; }
+    .album-image { width: 100%; aspect-ratio: 4 / 5; }
+    .album-info { padding: 18px 19px 19px; }
+    .album-info h3 { margin: 0 0 4px; font-size: 26px; }
+    .album-info p { margin: 0; color: var(--secondaire); font-size: 12px; }
+    .album-arrow { float: right; color: var(--vert); font-size: 20px; }
+
+    /* Galerie filtrable */
+    .gallery-section { background: #f1f3ee; border-top: 1px solid var(--bordure); border-bottom: 1px solid var(--bordure); }
+    .gallery-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 26px; }
+    .album-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .album-tab { padding: 8px 15px; border: 1px solid #d6ddd6; border-radius: 30px; background: white; color: var(--secondaire); cursor: pointer; font-size: 13px; }
+    .album-tab:hover { border-color: var(--vert); color: var(--vert); }
+    .album-tab[aria-pressed="true"] { background: var(--vert-fonce); border-color: var(--vert-fonce); color: white; }
+    .gallery-count { color: var(--secondaire); font-size: 12px; white-space: nowrap; }
+    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 19px; }
+    .photo-card { min-width: 0; }
+    .photo-button { display: block; width: 100%; padding: 0; border: 0; background: none; text-align: left; cursor: zoom-in; }
+    .photo-button:disabled { cursor: default; }
+    .photo-button:focus-visible { outline: 3px solid var(--vert); outline-offset: 4px; }
+    .photo-frame { width: 100%; aspect-ratio: 4 / 3; border-radius: 3px; transition: filter .2s; }
+    .photo-button:not(:disabled):hover .photo-frame { filter: brightness(.9); }
+    .photo-caption { display: flex; justify-content: space-between; gap: 15px; margin-top: 10px; font-size: 13px; }
+    .photo-caption small { color: var(--secondaire); font-size: 11px; }
+    .photo-hint { margin: 22px 0 0; color: var(--secondaire); font-size: 12px; }
+
+    /* À propos et contact */
+    .about-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(35px, 9vw, 140px); align-items: start; }
+    .about-layout p { color: var(--secondaire); }
+    .about-quote { border-left: 2px solid #adc4b5; padding: 12px 0 12px 30px; color: var(--vert-fonce); font-family: var(--serif); font-size: clamp(24px, 3vw, 37px); line-height: 1.35; }
+    .contact-section { padding: 65px 0; background: #e6ece6; }
+    .contact-layout { display: flex; justify-content: space-between; align-items: center; gap: 25px; }
+    .contact-layout h2 { margin-bottom: 9px; }
+    .contact-layout p { margin: 0; max-width: 500px; color: var(--secondaire); }
+    .contact-action { text-align: right; }
+    .contact-note { display: block; margin-top: 8px; color: var(--secondaire); font-size: 11px; }
+    .site-footer { padding: 26px 0; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; color: var(--secondaire); font-size: 11px; }
+    .footer-inner a { text-underline-offset: 3px; }
+
+    /* Agrandissement des photos */
+    .lightbox { width: min(1040px, 94vw); max-height: 94vh; padding: 15px; border: 0; border-radius: 4px; background: #fdfdfb; box-shadow: 0 30px 80px #0006; }
+    .lightbox::backdrop { background: rgba(16, 28, 23, .84); }
+    .lightbox img { display: block; max-width: 100%; max-height: 78vh; margin: auto; object-fit: contain; }
+    .lightbox p { margin: 10px 4px 0; font-size: 13px; color: var(--secondaire); }
+    .lightbox-close { float: right; margin-bottom: 10px; border: 0; background: transparent; color: var(--texte); cursor: pointer; font-size: 29px; line-height: 1; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr 1fr; gap: 30px; }
+      h1 { font-size: clamp(48px, 7vw, 70px); }
+      .album-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .album-image { aspect-ratio: 6 / 4; }
+      .photo-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 650px) {
+      .container { width: min(100% - 32px, 1180px); }
+      .header-inner { min-height: 64px; flex-wrap: wrap; padding-block: 11px; gap: 12px; }
+      .navigation { width: 100%; overflow-x: auto; padding-bottom: 2px; gap: 20px; }
+      .navigation a { font-size: 12px; }
+      .hero { display: flex; flex-direction: column; align-items: stretch; padding-block: 48px 55px; }
+      h1 { font-size: clamp(55px, 12vw, 80px); }
+      .hero-photo { height: 390px; box-shadow: 11px 11px 0 #e9eee7; }
+      .section-space { padding-block: 60px; }
+      .section-heading, .gallery-toolbar, .contact-layout { align-items: start; flex-direction: column; }
+      .section-heading { gap: 5px; }
+      .album-grid { gap: 12px; }
+      .album-info { padding: 12px; }
+      .album-info h3 { font-size: 23px; }
+      .album-image { aspect-ratio: 4 / 5; }
+      .photo-grid { gap: 12px; }
+      .photo-caption { display: block; }
+      .photo-caption small { display: block; }
+      .about-layout { grid-template-columns: 1fr; gap: 14px; }
+      .contact-action { text-align: left; }
+      .footer-inner { flex-direction: column; gap: 6px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+    /* Masquer la galerie par défaut */
+#galerie {
+  display: none;
+}
+
+/* Afficher la galerie quand on clique dessus */
+#galerie:target {
+  display: block;
+}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#accueil" aria-label="Retour à l'accueil">
+        <span class="brand-mark">A</span>
+        <span><span class="brand-name">Aurélien</span><span class="brand-note">Carnet photographique</span></span>
+      </a>
+      <nav class="navigation" aria-label="Navigation principale">
+        <a href="#accueil">Accueil</a>
+        <a href="#albums">Albums</a>
+        <a href="#galerie">Photos</a>
+        <a href="#apropos">À propos</a>
+        <a href="#contact">Contact</a>
       </nav>
-      <footer>
-        <ul class="icons">
-          <li>
-            <!-- Vous pouvez mettre en hyperlien vos reseaux sociaux en modifiant la valeur de href-->
-            <a href="https://x.com/MLB/" class="icon brands fa-twitter"
-              ><span class="label">Twitter</span></a
-            >
-          </li>
-          <li>
-            <a href="#" class="icon brands fa-facebook-f"
-              ><span class="label">Facebook</span></a
-            >
-          </li>
-          <li>
-            <a href="#" class="icon brands fa-linkedin"
-              ><span class="label">LinkedIn</span></a
-            >
-          </li>
-          <li>
-            <a href="#" class="icon brands fa-github"
-              ><span class="label">Github</span></a
-            >
-          </li>
-          <li>
-            <a href="#" class="icon solid fa-envelope"
-              ><span class="label">Email</span></a
-            >
-          </li>
-        </ul>
-      </footer>
+    </div>
+  </header>
+
+  <main>
+    <section id="accueil" class="container hero">
+      <div class="hero-text">
+        <p class="eyebrow">Le carnet photo d'Aurélien</p>
+        <h1>Été en <em>Bretagne.</em></h1>
+        <p>Des paysages, des voyages et des petits instants qu'on aimerait garder un peu plus longtemps.</p>
+        <a class="button" href="#albums">Découvrir les albums &nbsp; ↗</a>
+        <div class="hero-footnote"><span class="footnote-line"></span> Bretagne, Japon, Canada & New York</div>
+      </div>
+      <div class="image-shell hero-photo" data-place="bretagne" data-image="images/Bretagne 2026/0CC767A1-590B-47F0-9571-B8BC49FAE9ED_1_105_c.jpeg" data-alt="Photographie de couverture, Bretagne">
+        <span class="photo-placeholder">Photo de couverture à ajouter</span>
+      </div>
     </section>
 
-    <!-- Wrapper -->
-    <div id="wrapper">
-      <!-- Main -->
-      <div id="main">
-        <!-- One -->
-        <section id="one">
-          <div class="image main" data-position="center">
-            <img src="images/bg.jpeg" alt="" />
-          </div>
-          <div class="container">
-            <header class="major">
-              <h2>VOTRE NOM</h2>
-              <p>Le sous-titre de votre site.</p>
-            </header>
-            <p>
-              Faucibus sed lobortis aliquam lorem blandit. Lorem eu nunc metus
-              col. Commodo id in arcu ante lorem ipsum sed accumsan erat
-              praesent faucibus commodo ac mi lacus. Adipiscing mi ac commodo.
-              Vis aliquet tortor ultricies non ante erat nunc integer eu ante
-              ornare amet commetus vestibulum blandit integer in curae ac
-              faucibus integer non. Adipiscing cubilia elementum.
-            </p>
-          </div>
-        </section>
-
-        <!-- Two -->
-        <section id="two">
-          <div class="container">
-            <h3>Mes réalisations</h3>
-            <p>
-              Integer eu ante ornare amet commetus vestibulum blandit integer in
-              curae ac faucibus integer non. Adipiscing cubilia elementum
-              integer lorem ipsum dolor sit amet.
-            </p>
-            <ul class="feature-icons">
-              <li class="icon solid fa-code">
-                Ici vous pouvez écrire ce que vous voulez
-              </li>
-              <li class="icon solid fa-cubes">
-                Le class= s'occupe des logos à côté de votre texte
-              </li>
-              <li class="icon solid fa-book">
-                Trouvez autant de choses à écrire que vous le voulez
-              </li>
-              <li class="icon solid fa-coffee">Supprimez le reste</li>
-              <li class="icon solid fa-bolt">Lightning bolt</li>
-              <li class="icon solid fa-users">Shadow clone technique</li>
-            </ul>
-          </div>
-        </section>
-
-        <!-- Three -->
-        <section id="three">
-          <div class="container">
-            <h3>Mon CV</h3>
-            <p>
-              Integer eu ante ornare amet commetus vestibulum blandit integer in
-              curae ac faucibus integer non. Adipiscing cubilia elementum
-              integer. Integer eu ante ornare amet commetus.
-            </p>
-            <div class="features">
-              <article>
-                <a href="#" class="image"
-                  ><img src="images/pic01.jpg" alt=""
-                /></a>
-                <div class="inner">
-                  <h4>Possibly broke spacetime</h4>
-                  <p>
-                    Integer eu ante ornare amet commetus vestibulum blandit
-                    integer in curae ac faucibus integer adipiscing ornare amet.
-                  </p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <!-- Four -->
-        <section id="four">
-          <div class="container">
-            <h3>Me joindre</h3>
-            <p>
-              Integer eu ante ornare amet commetus vestibulum blandit integer in
-              curae ac faucibus integer non.
-            </p>
-            <div class="row gtr-uniform">
-              <div class="col-12">
-                <!-- Vous pouvez mettre votre email ici au lieu de your-email@example.com -->
-                <a
-                  href="mailto:your-email@example.com?subject=Sujet&body=Votre message ici."
-                  class="button primary"
-                >
-                  Envoyer un email
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- Five -->
-        <!-- -->
-      </div>
-
-      <!-- Footer -->
-      <section id="footer">
-        <div class="container">
-          <ul class="copyright">
-            <li>&copy; Untitled. All rights reserved.</li>
-            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-          </ul>
+    <section id="albums" class="albums-section section-space">
+      <div class="container">
+        <p class="eyebrow">01 / Mes destinations</p>
+        <div class="section-heading">
+          <h2>Des souvenirs d'ici<br>et d'ailleurs.</h2>
+          <p>La Bretagne à l'honneur, avec quelques escapades au Japon, au Canada et à New York. Chaque destination a sa petite collection.</p>
         </div>
-      </section>
+        <div class="album-grid">
+          <a class="album-card" href="#galerie" data-open-album="bretagne">
+            <div class="image-shell album-image" data-place="bretagne" data-image="images/Bretagne 2026/0CC767A1-590B-47F0-9571-B8BC49FAE9ED_1_105_c.jpeg" data-alt="Couverture de l'album Bretagne"><span class="photo-placeholder">Photo à ajouter</span></div>
+            <div class="album-info"><span class="album-arrow" aria-hidden="true">↗</span><h3>Bretagne</h3><p>La mer, les étés, les souvenirs.</p></div>
+          </a>
+          <a class="album-card" href="#galerie" data-open-album="japon">
+            <div class="image-shell album-image" data-place="japon" data-image="images/Japon 2026/P1068322.JPG" data-alt="Couverture de l'album Japon"><span class="photo-placeholder">Photo à ajouter</span></div>
+            <div class="album-info"><span class="album-arrow" aria-hidden="true">↗</span><h3>Japon</h3><p>Un autre horizon.</p></div>
+          </a>
+          <a class="album-card" href="#galerie" data-open-album="canada">
+            <div class="image-shell album-image" data-place="canada" data-image="images/Canada  2025-2026/4EC4808C-40EE-4F4E-8444-76CFE8E8D278_1_105_c.jpeg" data-alt="Couverture de l'album Canada"><span class="photo-placeholder">Photo à ajouter</span></div>
+            <div class="album-info"><span class="album-arrow" aria-hidden="true">↗</span><h3>Canada</h3><p>Des retrouvailles et des découvertes.</p></div>
+          </a>
+          <a class="album-card" href="#galerie" data-open-album="newyork">
+            <div class="image-shell album-image" data-place="newyork" data-image="images/New York 2025 /0EDC38A8-4155-42B2-A6CE-E0641F9F9CFB_1_105_c.jpeg" data-alt="Couverture de l'album New York"><span class="photo-placeholder">Photo à ajouter</span></div>
+            <div class="album-info"><span class="album-arrow" aria-hidden="true">↗</span><h3>New York</h3><p>La ville en images.</p></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="galerie" class="gallery-section section-space">
+      <div class="container">
+        <p class="eyebrow">02 / Galerie</p>
+        <div class="section-heading">
+          <div><h2 id="gallery-title">Bretagne</h2><p id="gallery-description">Mes images de Bretagne, entre paysages et moments partagés.</p></div>
+        </div>
+        <div class="gallery-toolbar">
+          <div class="album-tabs" aria-label="Choisir un album">
+            <button class="album-tab" type="button" data-album="bretagne" aria-pressed="true">Bretagne</button>
+            <button class="album-tab" type="button" data-album="japon" aria-pressed="false">Japon</button>
+            <button class="album-tab" type="button" data-album="canada" aria-pressed="false">Canada</button>
+            <button class="album-tab" type="button" data-album="newyork" aria-pressed="false">New York</button>
+          </div>
+          <span class="gallery-count" id="gallery-count"></span>
+        </div>
+        <div class="photo-grid" id="photo-grid"></div>
+        <p class="photo-hint">Les cadres indiqués « Photo à ajouter » se rempliront automatiquement dès que les fichiers correspondants seront déposés dans le dossier <code>images</code>.</p>
+        <noscript><p>Activez JavaScript pour afficher et parcourir les albums.</p></noscript>
+      </div>
+    </section>
+
+    <section id="apropos" class="section-space">
+      <div class="container about-layout">
+        <div>
+          <p class="eyebrow">03 / À propos</p>
+          <h2>Bonjour, moi c'est Aurélien.</h2>
+          <p>J'ai créé ce petit coin d'Internet pour réunir mes photographies et retrouver facilement mes souvenirs de voyage. La Bretagne occupe une place particulière dans cette collection, mais le carnet s'ouvre aussi sur d'autres destinations.</p>
+          <p>Pas besoin d'en faire trop : quelques images, des lieux qui comptent et le plaisir de les partager avec ma famille et mes proches.</p>
+        </div>
+        <div class="about-quote">« Parce que les plus beaux souvenirs méritent parfois leur propre album. »</div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div class="container contact-layout">
+        <div>
+          <p class="eyebrow">04 / Contact</p>
+          <h2>On garde le contact ?</h2>
+          <p>Une question, un souvenir à partager ou simplement envie de m'écrire ? Un petit message fait toujours plaisir.</p>
+        </div>
+        <div class="contact-action">
+          <a id="contact-link" class="button" href="mailto:aurelienchenepr@gmail.com">Me contacter</a>
+          <span id="contact-note" class="contact-note">Le contact sera activé lorsque l'adresse e-mail sera renseignée.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© <span id="year">2026</span> Aurélien · Carnet photographique personnel</span>
+      <span>Projet POL-6078 · Modèle initial : <a href="https://html5up.net" target="_blank" rel="noopener noreferrer">HTML5 UP</a> (<a href="https://html5up.net/license" target="_blank" rel="noopener noreferrer">CCA 3.0</a>)</span>
     </div>
+  </footer>
 
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
-  </body>
+  <dialog id="lightbox" class="lightbox" aria-label="Photographie agrandie">
+    <button id="lightbox-close" class="lightbox-close" type="button" aria-label="Fermer la photo">×</button>
+    <img id="lightbox-image" alt="">
+    <p id="lightbox-caption"></p>
+  </dialog>
+
+  <script>
+    // PERSONNALISATION FACILE : renseigner l'adresse pour activer le bouton Contact.
+    const CONTACT_EMAIL = "aurelienchenepr@gmail.com";
+
+    // PHOTOS : déposer ces fichiers dans le dossier images/ du dépôt GitHub.
+    // Pour changer une légende, modifier le texte placé après « caption ».
+    // Pour ajouter une image, dupliquer une ligne dans l'album correspondant.
+    const albums = {
+      bretagne: {
+        titre: "Bretagne",
+        description: "Bretagne été 2026.",
+        photos: [
+          { src: "images/Bretagne 2026/338F5C29-B810-4828-BD51-EC0382A38895_1_105_c.jpeg", caption: "Bretagne · Photo 01" },
+          { src: "images/Bretagne 2026/8D13A3C6-2519-4553-B829-2322BDB43EC6_1_105_c.jpeg", caption: "Bretagne · Photo 02" },
+          { src: "images/Bretagne 2026/F1F698F8-A83F-44CD-A0E9-3812093AFBD8_1_105_c.jpeg", caption: "Bretagne · Photo 03" },
+          { src: "images/Bretagne 2026/DD040946-954A-4F08-B4A7-78C84FFB0E30_1_105_c.jpeg", caption: "Bretagne · Photo 04" },
+          { src: "images/Bretagne 2026/6DCA3A22-9C45-4D6B-B48B-DC9400AD2C1F_1_105_c.jpeg", caption: "Bretagne · Photo 05" },
+          { src: "images/Bretagne 2026/65D6E3EB-97BD-4E14-BB52-2BC6065AA927_1_105_c.jpeg", caption: "Bretagne · Photo 06" },
+          { src: "images/Bretagne 2026/3EB3BEF5-F776-4F8D-BBC7-8B05891BEE63_1_105_c.jpeg", caption: "Bretagne · Photo 07" },
+          { src: "images/Bretagne 2026/0CC767A1-590B-47F0-9571-B8BC49FAE9ED_1_105_c.jpeg", caption: "Bretagne · Photo 08" },
+          { src: "images/Bretagne 2026/ECD1AC64-F14D-46CF-95F9-BFBA1B93C7E4_1_105_c.jpeg", caption: "Bretagne · Photo 09" }
+        ]
+      },
+      japon: {
+        titre: "Japon",
+        description: "Tokyo, printemps 2026",
+        photos: [
+          { src: "images/Japon 2026/P1058117.JPG", caption: "Japon · Photo 01" },
+          { src: "images/Japon 2026/P1057565.JPG", caption: "Japon · Photo 02" },
+          { src: "images/Japon 2026/P1047166.JPG", caption: "Japon · Photo 03" },
+          { src: "images/Japon 2026/P1047127.JPG", caption: "Japon · Photo 04" },
+          { src: "images/Japon 2026/P1046615.JPG", caption: "Japon · Photo 05" },
+          { src: "images/Japon 2026/P1046585.JPG", caption: "Japon · Photo 06" },
+          { src: "images/Japon 2026/P1046525.JPG", caption: "Japon · Photo 07" },
+          { src: "images/Japon 2026/P1046314.JPG", caption: "Japon · Photo 08" },
+          { src: "images/Japon 2026/P1046316.JPG", caption: "Japon · Photo 09" },
+          { src: "images/Japon 2026/P1046404.JPG", caption: "Japon · Photo 10" },
+        ]
+      },
+      canada: {
+        titre: "Canada",
+        description: "C'est beau mais c'est grand.",
+        photos: [
+          { src: "images/Canada  2025-2026/0CF68519-4783-43ED-826D-2A37891962B0_1_105_c.jpeg", caption: "Canada · Photo 01" },
+          { src: "images/Canada  2025-2026/1EF208CF-36FD-449D-A1E1-3399BD7DB105_1_105_c.jpeg", caption: "Canada · Photo 02" },
+          { src: "images/Canada  2025-2026/4EC4808C-40EE-4F4E-8444-76CFE8E8D278_1_105_c.jpeg", caption: "Canada · Photo 03" },
+          { src: "images/Canada  2025-2026/52BB2F31-183B-4AFD-8820-DDF0FF46ED52_1_105_c.jpeg", caption: "Canada · Photo 04" },
+          { src: "images/Canada  2025-2026/328FBFA3-71DB-4132-AD06-18FCE63E2A21_1_105_c.jpeg", caption: "Canada · Photo 05" },
+          { src: "images/Canada  2025-2026/881A3BF7-96F8-448B-AEB4-EAB702DAFCF7_1_105_c.jpeg", caption: "Canada · Photo 06" },
+          { src: "images/Canada  2025-2026/122633B3-2AD0-4E8C-B7B8-9068C9B5DBB0_1_105_c.jpeg", caption: "Canada · Photo 07" },
+          { src: "images/Canada  2025-2026/491042FF-27C3-4C4C-A8D5-2A102B65626C_1_105_c.jpeg", caption: "Canada · Photo 08" },
+          { src: "images/Canada  2025-2026/P1046217.JPG", caption: "Canada · Photo 09" }
+        ]
+      },
+      newyork: {
+        titre: "New York",
+        description: "Quelques images de New York, au fil des rues et des découvertes.",
+        photos: [
+          { src: "images/New York 2025 /41F64855-B18E-4054-AD10-01F98C1D2E43_1_105_c.jpeg", caption: "New York · Photo 01" },
+          { src: "images/New York 2025 /4750FBC9-8410-4178-B5B4-5DAA6C40A553_1_105_c.jpeg", caption: "New York · Photo 02" },
+          { src: "images/New York 2025 /0026196C-3F79-42F8-9EC7-72CC8731D86B_1_201_a.jpeg", caption: "New York · Photo 03" },
+          { src: "images/New York 2025 /E8850962-CC1A-43DD-A531-9159687DBDC1_1_105_c.jpeg", caption: "New York · Photo 04" }
+        ]
+      }
+    };
+
+    function placeImage(frame, path, alternative, onSuccess) {
+      const photo = document.createElement("img");
+      photo.alt = alternative;
+      photo.loading = frame.classList.contains("hero-photo") ? "eager" : "lazy";
+      photo.decoding = "async";
+      photo.addEventListener("load", () => {
+        frame.classList.add("is-loaded");
+        if (onSuccess) onSuccess();
+      });
+      photo.addEventListener("error", () => photo.remove());
+      frame.appendChild(photo);
+      photo.src = path;
+    }
+
+    document.querySelectorAll(".image-shell[data-image]").forEach(frame => {
+      placeImage(frame, frame.dataset.image, frame.dataset.alt || "Photographie");
+    });
+
+    const grid = document.getElementById("photo-grid");
+    const modal = document.getElementById("lightbox");
+    const modalImage = document.getElementById("lightbox-image");
+    const modalCaption = document.getElementById("lightbox-caption");
+
+    function showAlbum(name) {
+      const album = albums[name];
+      if (!album) return;
+      document.getElementById("gallery-title").textContent = album.titre;
+      document.getElementById("gallery-description").textContent = album.description;
+      document.getElementById("gallery-count").textContent = album.photos.length + " emplacements photo";
+      document.querySelectorAll(".album-tab").forEach(button => {
+        button.setAttribute("aria-pressed", String(button.dataset.album === name));
+      });
+      grid.replaceChildren();
+
+      album.photos.forEach((item, index) => {
+        const card = document.createElement("article");
+        card.className = "photo-card";
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "photo-button";
+        button.disabled = true;
+        button.setAttribute("aria-label", "Agrandir : " + item.caption);
+        const frame = document.createElement("div");
+        frame.className = "image-shell photo-frame";
+        frame.dataset.place = name;
+        const placeholder = document.createElement("span");
+        placeholder.className = "photo-placeholder";
+        placeholder.textContent = "Photo à ajouter";
+        frame.appendChild(placeholder);
+        placeImage(frame, item.src, item.caption, () => { button.disabled = false; });
+        button.appendChild(frame);
+        button.addEventListener("click", () => {
+          modalImage.src = item.src;
+          modalImage.alt = item.caption;
+          modalCaption.textContent = item.caption;
+          modal.showModal();
+        });
+        const legend = document.createElement("div");
+        legend.className = "photo-caption";
+        const text = document.createElement("span");
+        text.textContent = item.caption;
+        const number = document.createElement("small");
+        number.textContent = String(index + 1).padStart(2, "0") + " / " + String(album.photos.length).padStart(2, "0");
+        legend.append(text, number);
+        card.append(button, legend);
+        grid.appendChild(card);
+      });
+    }
+
+    document.querySelectorAll(".album-tab").forEach(button => {
+      button.addEventListener("click", () => showAlbum(button.dataset.album));
+    });
+    document.querySelectorAll("[data-open-album]").forEach(link => {
+      link.addEventListener("click", () => showAlbum(link.dataset.openAlbum));
+    });
+    document.getElementById("lightbox-close").addEventListener("click", () => modal.close());
+    modal.addEventListener("click", event => { if (event.target === modal) modal.close(); });
+    modal.addEventListener("close", () => modalImage.removeAttribute("src"));
+
+    if (CONTACT_EMAIL.trim()) {
+      const contact = document.getElementById("contact-link");
+      contact.href = "mailto:" + CONTACT_EMAIL.trim();
+      contact.textContent = "M'envoyer un e-mail ↗";
+      contact.removeAttribute("aria-disabled");
+      contact.classList.remove("is-disabled");
+      document.getElementById("contact-note").textContent = "";
+    }
+    document.getElementById("year").textContent = new Date().getFullYear();
+    // Créer une galerie avec toutes les photos
+albums.toutes = {
+  titre: "Toutes les photos",
+  description: "Bretagne, Japon, Canada et New York.",
+  photos: Object.values(albums).flatMap(album => album.photos)
+};
+
+// Cacher la galerie au démarrage
+const galerie = document.getElementById("galerie");
+galerie.style.display = "none";
+
+// Afficher la galerie quand on clique sur un album
+document.querySelectorAll(".album-card").forEach(carte => {
+  carte.addEventListener("click", () => {
+    galerie.style.display = "block";
+  });
+});
+
+// Afficher toutes les photos avec le bouton Photos
+document.querySelector('.navigation a[href="#galerie"]').addEventListener("click", () => {
+  showAlbum("toutes");
+  galerie.style.display = "block";
+});
+
+// Cacher la galerie quand on revient aux autres rubriques
+document.querySelectorAll('a[href^="#"]:not([href="#galerie"])').forEach(lien => {
+  lien.addEventListener("click", () => {
+    galerie.style.display = "none";
+  });
+});
+  </script>
+</body>
 </html>
-
