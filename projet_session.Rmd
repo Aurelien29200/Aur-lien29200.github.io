@@ -1,0 +1,263 @@
+---
+title: "Le retour des Taliban et la recomposition géoéconomique de l'Asie régionale"
+subtitle: "Projet de session POL 6078 : les outils numériques au fil du cycle de la recherche"
+author: "Aurélien Chêne"
+date: "Automne 2026"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: false
+    theme: flatly
+    df_print: kable
+bibliography: references.bib
+lang: fr-CA
+link-citations: true
+suppress-bibliography: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE,
+                      fig.align = "center", out.width = "90%")
+# Toute l'analyse est dans un script séparé, exécuté ici pour que le document
+# reste synchronisé avec le code (réplicabilité).
+source("code/02_analyse_visualisation.R", encoding = "UTF-8")
+
+pct <- function(x, d = 1) paste0(formatC(100 * x, format = "f", digits = d,
+                                         decimal.mark = ","), " %")
+aa  <- tidyr::pivot_wider(avant_apres, id_cols = groupe,
+                          names_from = periode, values_from = part_moyenne)
+part <- function(g, p) aa[[p]][aa$groupe == g]
+regional <- c("Pakistan", "Iran", "Asie centrale", "Chine")
+reg_avant <- sum(aa[["2017-2020"]][aa$groupe %in% regional])
+reg_apres <- sum(aa[["2022-2023"]][aa$groupe %in% regional])
+hhi <- function(a) round(indicateurs$hhi[indicateurs$annee == a])
+```
+
+# Introduction : le cycle de la recherche et ses outils
+
+Ce projet reprend, sous une forme resserrée, la problématique d'un essai rédigé pour le cours ETI-7013 et la soumet au cycle hypothético-déductif vu en classe : partir d'une question, la nourrir par la théorie, en dériver une hypothèse testable, définir une méthode de collecte, produire des résultats, puis conclure en revenant à la question de départ.
+
+Le tableau ci-dessous associe à chaque étape du cycle l'outil numérique principal mobilisé. Un même outil revient parfois à plusieurs étapes, ce qui est voulu : la cohérence de la chaîne d'outils compte autant que le choix de chacun.
+
+| Étape du cycle | Outil principal | Usage concret |
+|:---|:---|:---|
+| Question | Google Scholar | Repérer les travaux récents sur l'Afghanistan post-2021 et cerner l'état du débat |
+| Théorie | Google Scholar, Zotero | Remonter les citations (« Cité par »), archiver et annoter les sources dans une collection Zotero |
+| Hypothèses | Zotero | Relire les notes et surlignages pour isoler une affirmation mesurable de la littérature |
+| Méthodologie | UN Comtrade (API publique) | Collecter le commerce de l'Afghanistan par partenaire, 2015-2025 |
+| Résultats | R (tidyverse, ggplot2) | Nettoyer, agréger, calculer les indicateurs et produire les graphiques |
+| Conclusion | R Markdown, Zotero, GitHub | Rédiger un document reproductible, citer automatiquement les sources, versionner le tout |
+
+# 1. Question de recherche et hypothèse
+
+## 1.a Question de recherche
+
+> **Dans quelle mesure le retour des Taliban a-t-il transformé la crise afghane en facteur de recomposition géostratégique et géoéconomique de l'Asie régionale ?**
+
+La question est large ; pour la rendre traitable dans le cadre de ce projet, elle est ici restreinte à sa dimension géoéconomique la plus directement observable : l'orientation géographique du commerce extérieur afghan. Suivant @wigell2016, la géoéconomie désigne l'usage géostratégique de la puissance économique ; le commerce et les corridors en sont l'expression la plus concrète.
+
+## 1.b Brève revue de la littérature
+
+La centralité stratégique de l'Afghanistan n'est pas nouvelle : @barfield2023 rappelle que son territoire forme une « zone de fracture » entre l'Iran, l'Asie centrale et l'Asie du Sud, dont l'intérêt tenait moins à ses richesses qu'au contrôle des routes qui les relient, d'où son rôle historique d'État tampon. Le retour des Taliban en 2021 s'explique pour sa part par la résilience d'un mouvement qui s'est professionnalisé et centralisé sous la pression militaire au cours de la décennie précédente [@farrell2013].
+
+La littérature récente converge sur un constat : depuis 2021, la question afghane s'est **régionalisée**. Pour @seyidbayli2025, le retrait américain a ouvert un espace dans lequel la Chine, la Russie et l'Iran se sont réalignés, contribuant à un environnement eurasien plus multipolaire. L'International Crisis Group [-@icg2024] nuance cette lecture du « vide de puissance » : les voisins de Kaboul pratiquent une normalisation fonctionnelle et transactionnelle (frontières, eau, migrations, commerce) plutôt que de véritables alliances. @bano2026 montre que cette régionalisation varie selon l'exposition de chaque puissance : frontalière et directe pour le Pakistan, stratégique et indirecte pour l'Inde, liée aux corridors pour la Chine.
+
+Sur le plan économique, l'isolement financier du régime (gel des avoirs, chute de l'aide qui finançait environ 75 % des dépenses publiques) a poussé Kaboul à chercher des partenaires régionaux [@icg2024]. Les Taliban mettent en avant l'image d'un *bridge state* reliant l'Asie centrale à l'Asie du Sud, à travers des projets ferroviaires (transafghan), énergétiques (CASA-1000, TAPI) et commerciaux, dont la plupart restent cependant prospectifs. La Banque mondiale estime qu'en 2026 les routes iraniennes assurent près de 60 % des importations afghanes, après la fermeture de la frontière pakistanaise en octobre 2025 [@worldbank2026]. Enfin, le paradoxe pakistanais est bien documenté : la victoire des Taliban, d'abord perçue comme un succès d'Islamabad, s'est muée en « victoire à la Pyrrhus » avec la résurgence du TTP et la dégradation des relations bilatérales [@ullah2022; @sg2026]. L'intérêt chinois, enfin, est réel mais prudent, dominé par les préoccupations sécuritaires plutôt que par l'expansion des Nouvelles routes de la soie [@manish2023; @deberdt2024].
+
+Plusieurs rapports d'organisations internationales soulignent enfin les limites de cette intégration régionale : la persistance de menaces terroristes transnationales, notamment l'EIIL-K [@csnu2026] ; l'exclusion des femmes, dont seulement 24,2 % participaient à la population active en 2024 [@unwomen2025] et que le PNUD considère comme la contrainte la plus lourde sur le redressement économique à long terme [@undp2026] ; enfin, le choc rural provoqué par l'interdiction du pavot, dont les surfaces cultivées sont passées d'environ 232 000 hectares en 2022 à 10 200 hectares en 2025 [@unodc2025].
+
+## 1.c Hypothèse
+
+Cette revue permet de dériver une hypothèse principale, décomposée en deux propositions mesurables à partir de données commerciales :
+
+- **H1a (régionalisation)** : depuis 2021, la part des voisins régionaux (Pakistan, Iran, Asie centrale, Chine) dans le commerce extérieur afghan augmente, tandis que celle des partenaires occidentaux recule.
+- **H1b (diversification des dépendances)** : à l'intérieur de cet espace régional, la dépendance au Pakistan diminue au profit de l'Iran et de l'Asie centrale, ce qui se traduit par une concentration géographique plus faible du commerce.
+
+L'hypothèse nulle correspondante est l'absence de rupture : les parts relatives des partenaires après 2021 resteraient dans la fourchette observée en 2017-2020.
+
+## 1.d Outils utilisés pour cette étape : Google Scholar et Zotero
+
+**Google Scholar** a servi de point d'entrée. Ce moteur a été retenu parce qu'il indexe à la fois les revues à comité de lecture, les rapports d'organisations internationales et les prépublications, ce qui est indispensable sur un sujet aussi récent que l'Afghanistan post-2021, où une part importante de l'information pertinente provient de l'ONU, de la Banque mondiale ou de l'International Crisis Group. Son utilisation a consisté à :
+
+1. lancer des requêtes combinant opérateurs et guillemets, par exemple `"Taliban" AND (geoeconomics OR "regional connectivity") AND Afghanistan`, `"Taliban 2.0" China OR Pakistan OR India`, `"buffer state" OR "bridge state" Afghanistan` ;
+2. restreindre la période à 2021 et après grâce au filtre de dates, pour ne conserver que la littérature postérieure à la prise de Kaboul ;
+3. utiliser la fonction « Cité par » à partir de textes pivots, comme @wigell2016 pour le cadre conceptuel ou @ullah2022 pour le cas pakistanais, afin de remonter vers les travaux qui les mobilisent ;
+4. créer une alerte sur la requête principale afin de suivre les nouvelles publications pendant la session.
+
+**Zotero** a pris le relais pour organiser les sources. Ce logiciel a été choisi parce qu'il est libre, gratuit, multiplateforme, et qu'il s'intègre directement à R Markdown. Son utilisation a consisté à :
+
+1. importer chaque référence depuis Google Scholar ou depuis la page de l'éditeur grâce au connecteur de navigateur Zotero, ce qui récupère automatiquement les métadonnées et le DOI ;
+2. classer les sources dans une collection dédiée, avec des étiquettes thématiques (« géostratégie », « géoéconomie », « Pakistan », « Chine », « données ») ;
+3. annoter les PDF dans le lecteur intégré, puis rassembler les passages clés dans des notes ; c'est à partir de ces notes qu'a été repérée l'affirmation la plus directement testable de la littérature, la réorientation des flux commerciaux, qui fonde H1 ;
+4. exporter la collection au format BibTeX dans le fichier `references.bib`, que R Markdown lit pour produire les citations et la bibliographie de ce document.
+
+# 2. Collecte de données
+
+## 2.a Outil choisi : la base UN Comtrade
+
+Pour tester H1, il faut des données sur le commerce de l'Afghanistan ventilé par partenaire, sur une période qui encadre 2021. Le choix s'est porté sur **UN Comtrade**, la base de statistiques du commerce international de la Division de statistique des Nations Unies [@comtrade2026]. C'est la référence en économie internationale et en relations internationales pour ce type de données : elle est publique, couvre près de 200 pays depuis des décennies et documente sa méthodologie.
+
+## 2.b Procédure de collecte
+
+**Le problème des données manquantes.** L'Afghanistan ne transmet plus de déclarations régulières à UN Comtrade depuis la prise du pouvoir par les Taliban. Le recours à la méthode classique des **données miroirs** s'impose donc : le commerce d'un pays est reconstitué à partir de ce que déclarent ses partenaires. Les exportations d'un pays vers l'Afghanistan correspondent aux importations afghanes, et ses importations depuis l'Afghanistan aux exportations afghanes.
+
+**Les étapes.**
+
+1. La base a d'abord été explorée en interface graphique sur le portail ComtradePlus (*Trade Data* → *Goods* → fréquence annuelle, nomenclature HS) pour identifier les bons paramètres : partenaire « Afghanistan » (code M49 4), tous les pays déclarants, flux « Export » et « Import », produit « TOTAL - All commodities ».
+2. La requête a ensuite été automatisée par l'**API publique** de Comtrade, qui renvoie du JSON sans clé d'accès. Une requête a été envoyée par année (2015 à 2025) et par sens de flux, soit 22 requêtes, chacune renvoyant entre 76 et 140 pays déclarants. Le gabarit de requête est le suivant :
+
+```text
+https://comtradeapi.un.org/public/v1/preview/C/A/HS?period=2022&partnerCode=4
+    &flowCode=X&cmdCode=TOTAL&customsCode=C00&motCode=0&partner2Code=0
+```
+
+3. L'API limite le débit (erreur 429 en cas de requêtes trop rapprochées) ; les appels ont donc été espacés et ceux qui échouaient, relancés automatiquement.
+4. Pour alléger le fichier de travail, seuls les 21 principaux partenaires ont été conservés (les 20 premiers en valeur cumulée sur la période, plus les voisins régionaux) ; tous les autres déclarants sont regroupés sous la modalité `OTH`. Le total annuel reste donc exhaustif.
+
+Le script `code/01_collecte_comtrade.R` reproduit cette procédure dans R. Le fichier obtenu, extrait le 21 novembre 2026, est `data/comtrade_miroir_afghanistan_2015_2025.csv` (`r nrow(brut)` lignes : année, code du pays déclarant, sens du flux, valeur en dollars courants).
+
+```{r apercu-donnees}
+head(brut, 6)
+```
+
+**Limites de couverture.** Les données miroirs dépendent de la régularité des partenaires. Le contrôle ci-dessous montre que le Turkménistan ne déclare jamais, que l'Ouzbékistan n'apparaît qu'à partir de 2017, que la Russie cesse de déclarer après 2021 et que l'Iran, les Émirats arabes unis et le Tadjikistan n'ont pas encore publié 2024 et 2025. **La période de comparaison principale est donc 2017-2023**, et les années 2024-2025 ne sont exploitées qu'à travers un panel constant de déclarants.
+
+```{r couverture}
+couverture |>
+  dplyr::filter(pays %in% c("Iran", "Pakistan", "Ouzbékistan", "Tadjikistan",
+                            "Chine", "Émirats arabes unis", "Russie")) |>
+  dplyr::mutate(dplyr::across(-pays, ~ ifelse(.x, "✓", "–")))
+```
+
+# 3. Analyse et visualisation des données
+
+## 3.a Outil choisi : R, avec le tidyverse et ggplot2
+
+L'analyse est entièrement réalisée dans **R** [@wickham2023], avec les bibliothèques `dplyr` et `tidyr` pour la manipulation des données, `readr` pour la lecture et l'écriture, et `ggplot2` pour les graphiques. Tout le code est dans `code/02_analyse_visualisation.R`, exécuté au début de ce document : chaque chiffre et chaque figure sont donc recalculés à chaque compilation.
+
+## 3.b Démarche d'analyse
+
+Le script procède en quatre temps :
+
+1. **Inversion miroir et recodage** : chaque code pays M49 est associé à un nom et à un groupe analytique (Pakistan, Iran, Asie centrale, Chine, Inde, Émirats arabes unis, Occident et OCDE, autres) ;
+2. **Agrégation** : `group_by()` et `summarise()` calculent, pour chaque année et chaque groupe, le commerce total (importations + exportations) et sa part dans le total afghan observé ;
+3. **Indicateur de concentration** : l'indice de Herfindahl-Hirschman (HHI), somme des carrés des parts de chaque pays partenaire, mesure la diversification (plus il est bas, plus le commerce est dispersé) ;
+4. **Visualisation** : `ggplot2` produit quatre figures exportées dans `images/`, avec une palette fixe (une couleur par groupe dans toutes les figures) et une ligne verticale marquant août 2021.
+
+Voici, à titre d'illustration, le cœur du calcul du HHI :
+
+```{r extrait-code, eval = FALSE}
+commerce |>
+  filter(code_declarant != "OTH") |>
+  group_by(annee, pays) |>
+  summarise(v = sum(valeur_usd), .groups = "drop") |>
+  group_by(annee) |>
+  summarise(hhi = sum((v / sum(v))^2) * 10000)
+```
+
+## 3.c Résultats
+
+**Volume et composition.** La figure 1 montre un commerce total d'environ 10 à 12 milliards de dollars par an, en léger repli après 2021. La recomposition est surtout visible dans sa structure : la part des partenaires occidentaux s'effondre (vert foncé), tandis que l'Asie centrale et la Chine progressent.
+
+```{r fig1, echo = FALSE, fig.cap = "Figure 1. Commerce total de l'Afghanistan par groupe de partenaires, 2015-2025"}
+knitr::include_graphics("images/fig1_commerce_par_groupe.png")
+```
+
+**Parts relatives (H1a et H1b).** La figure 2 et le tableau qui suit comparent la moyenne 2017-2020 à la moyenne 2022-2023 (l'année de transition 2021 est exclue).
+
+```{r fig2, echo = FALSE, fig.cap = "Figure 2. Part des principaux partenaires dans le commerce afghan, 2015-2023"}
+knitr::include_graphics("images/fig2_parts_partenaires.png")
+```
+
+```{r tableau-avant-apres, echo = FALSE}
+aa |>
+  dplyr::mutate(variation = sprintf("%+.1f pts", 100 * (`2022-2023` - `2017-2020`)),
+                variation = sub(".", ",", variation, fixed = TRUE),
+                dplyr::across(c(`2017-2020`, `2022-2023`), ~ pct(.x))) |>
+  dplyr::rename(Groupe = groupe, `Part 2017-2020` = `2017-2020`,
+                `Part 2022-2023` = `2022-2023`, `Écart (points)` = variation) |>
+  knitr::kable(align = "lrrr",
+               caption = "Part moyenne de chaque groupe dans le commerce afghan observé")
+```
+
+- La part cumulée des quatre voisins régionaux passe de `r pct(reg_avant)` à `r pct(reg_apres)`, et celle des partenaires occidentaux et de l'OCDE tombe de `r pct(part("Occident et OCDE", "2017-2020"))` à `r pct(part("Occident et OCDE", "2022-2023"))`. **H1a est confortée.**
+- La hausse régionale vient surtout de l'Asie centrale (de `r pct(part("Asie centrale", "2017-2020"))` à `r pct(part("Asie centrale", "2022-2023"))`) et de la Chine (de `r pct(part("Chine", "2017-2020"))` à `r pct(part("Chine", "2022-2023"))`). En revanche, la part du **Pakistan augmente** (de `r pct(part("Pakistan", "2017-2020"))` à `r pct(part("Pakistan", "2022-2023"))`) et celle de l'**Iran recule** légèrement (de `r pct(part("Iran", "2017-2020"))` à `r pct(part("Iran", "2022-2023"))`). Sur 2022-2023, la première moitié de H1b est donc **infirmée**.
+
+**Concentration.** Le HHI (figure 3) baisse de `r hhi(2015)` en 2015 à `r hhi(2023)` en 2023, mais l'essentiel de la baisse précède 2021 : entre 2020 (`r hhi(2020)`) et 2023, il est pratiquement stable. La diversification est donc une tendance de fond plutôt qu'une rupture provoquée par le changement de régime.
+
+```{r fig3, echo = FALSE, fig.cap = "Figure 3. Concentration géographique du commerce afghan (HHI), 2015-2023"}
+knitr::include_graphics("images/fig3_concentration_hhi.png")
+```
+
+**Les années récentes.** Pour exploiter 2024 et 2025 malgré les trous de couverture, la figure 4 se limite aux déclarants présents chaque année de 2017 à 2025. Elle montre qu'en 2025 le commerce avec l'Asie centrale (Ouzbékistan en tête) et la Chine dépasse, pour la première fois, celui avec le Pakistan, qui chute après le pic de 2024. Ce retournement coïncide avec la fermeture de la frontière afghano-pakistanaise en octobre 2025 [@sg2026]. L'Iran, absent de ce panel, ne peut malheureusement pas être évalué sur cette période avec Comtrade.
+
+```{r fig4, echo = FALSE, fig.cap = "Figure 4. Commerce avec un panel constant de déclarants, 2017-2025"}
+knitr::include_graphics("images/fig4_panel_constant.png")
+```
+
+## 3.d Conclusion de l'analyse
+
+Les données soutiennent la thèse d'une **régionalisation** du commerce afghan après 2021 : l'Occident se retire, l'Asie centrale et la Chine montent. Elles ne confirment pas, en revanche, une sortie rapide de la dépendance pakistanaise : jusqu'en 2024, le Pakistan reste, avec l'Iran, l'un des deux premiers partenaires régionaux, et la bascule n'apparaît qu'en 2025, à la faveur d'un choc politique (la fermeture de la frontière) plutôt que d'une stratégie de diversification déjà aboutie. Ce résultat rejoint la conclusion de l'essai d'origine : l'Afghanistan est « davantage régionalisé, mais pas réellement intégré », et sa géoéconomie se caractérise moins par l'indépendance que par une diversification encore partielle de ses dépendances. Il invite, en retour, à reformuler la question (flèche « Contribution » du cycle) : la réorientation vers l'Iran observée par la Banque mondiale en 2026 devra être vérifiée quand l'Iran aura publié ses données 2024-2026, ou à partir d'une autre source, comme les statistiques douanières nationales.
+
+# 4. Discussion : pourquoi ces outils ?
+
+Le choix des outils a été guidé par une préoccupation centrale : produire un travail **vérifiable par un tiers**. Sur un sujet politiquement sensible, où les chiffres circulent souvent sans source, pouvoir montrer d'où vient chaque donnée et comment elle a été transformée est une exigence de rigueur autant qu'une valeur. Les critères de sélection vus en classe se déclinent ainsi.
+
+**Accessibilité.** Tous les outils retenus sont gratuits : Google Scholar, Zotero, UN Comtrade (API publique sans clé), R et RStudio ou Positron. Personne n'a besoin d'un abonnement institutionnel pour refaire l'analyse. Des bases comme Factiva ou Eureka, très utiles pour la presse, ont été écartées : leur accès dépend d'une licence universitaire et elles ne fournissent pas de données commerciales structurées.
+
+**Communauté d'utilisateurs.** R et le tidyverse disposent d'une communauté considérable (documentation, forums, ouvrages en libre accès comme @wickham2023), tout comme Zotero. Lorsqu'un problème survient, par exemple pour gérer les accents dans les graphiques ou le format BibTeX, une solution documentée existe presque toujours.
+
+**Popularité dans le domaine.** UN Comtrade est la source de référence en économie politique internationale pour le commerce bilatéral ; l'utiliser rend les résultats comparables à ceux de la littérature. R est aujourd'hui l'un des langages les plus répandus en science politique quantitative, et Google Scholar reste le moteur le plus utilisé pour une première exploration interdisciplinaire.
+
+**Compatibilité.** La chaîne d'outils est intégrée de bout en bout : Google Scholar exporte vers Zotero, Zotero exporte un fichier BibTeX que R Markdown lit directement, l'API Comtrade renvoie du JSON que R convertit en tableau, et le tout se versionne sur GitHub. Aucune étape ne demande de copier-coller manuel, source fréquente d'erreurs.
+
+**Transparence et réplicabilité.** C'est le critère décisif. Un tableur aurait permis de produire les mêmes graphiques, mais les manipulations y restent invisibles. Ici, la requête de collecte, le recodage des pays, le calcul du HHI et chaque figure sont écrits dans des scripts versionnés ; les chiffres cités dans le texte sont calculés par le code au moment de la compilation. Les limites des données (trous de couverture, données 2025 provisoires) sont en outre documentées explicitement plutôt que masquées.
+
+**Adaptabilité et flexibilité.** R permet d'étendre l'analyse sans changer d'outil : passer à un niveau de produit plus fin (par exemple les combustibles ou les produits agricoles), ajouter des pays ou d'autres indicateurs ne demande que quelques lignes. L'approche par API se met à jour en relançant simplement le script de collecte lorsque de nouvelles déclarations sont publiées, ce qui sera nécessaire pour l'Iran.
+
+**Limites et alternatives.** Elicit ou Connected Papers auraient pu compléter Google Scholar pour cartographier la littérature, mais leur couverture des rapports d'organisations internationales est plus faible. La base WITS de la Banque mondiale, qui redistribue les données Comtrade, aurait été une alternative raisonnable pour la collecte ; Python (pandas, matplotlib) aurait convenu pour l'analyse. R a été privilégié parce qu'il s'intègre nativement à R Markdown, format exigé pour ce projet.
+
+# Références
+
+<div class="references-apa">
+
+Bano, S. (2026). Shared insecurity, divergent responses: Pakistan, India, and China after the return of the Taliban. *Asian Security*. https://doi.org/10.1080/14799855.2026.2712253
+
+Barfield, T. (2023). *Afghanistan: A cultural and political history* (2nd ed.). Princeton University Press.
+
+Conseil de sécurité des Nations Unies. (2026). *Trente-huitième rapport de l'Équipe d'appui analytique et de surveillance des sanctions* (S/2026/651).
+
+Deberdt, R., Buffenoir, N., & Gholami, F. (2024). Mining green minerals with the Taliban: Addressing new sourcing risks from Afghanistan in the age of the green transition. *The Extractive Industries and Society*, *17*, Article 101446. https://doi.org/10.1016/j.exis.2024.101446
+
+Farrell, T., & Giustozzi, A. (2013). The Taliban at war: Inside the Helmand insurgency, 2004–2012. *International Affairs*, *89*(4), 845–871.
+
+International Crisis Group. (2024). *The Taliban's neighbourhood: Regional diplomacy with Afghanistan* (Asia Report No. 337). https://www.crisisgroup.org/node/22722
+
+Manish, & Mani, A. (2023). Taliban 2.0 and the BRI: A text analysis of China's balancing act. *Strategic Analysis*, *47*(6), 503–519. https://doi.org/10.1080/09700161.2024.2315707
+
+Secrétaire général des Nations Unies. (2026). *The situation in Afghanistan and its implications for international peace and security* (A/80/745–S/2026/431).
+
+Seyidbayli, T. (2025). U.S. withdrawal from Afghanistan and realignment of Eurasian rival powers. *Journal of Strategic Security*, *18*(2), 215–239. https://doi.org/10.5038/1944-0472.18.2.2499
+
+Ullah, Z. (2022). Contextualising the Taliban redux (2021): Is the Taliban takeover of Afghanistan a Pyrrhic victory for Pakistan? *Small Wars & Insurgencies*, *33*(7), 1177–1202. https://doi.org/10.1080/09592318.2022.2118417
+
+UN Women. (2025). *Gender index 2024: Afghanistan*. https://www.unwomen.org/en/digital-library/publications/2025/06/afghanistan-gender-index-2024
+
+United Nations Development Programme. (2026). *Afghanistan socioeconomic review, 2024–2025: Mass returns at a time of growing insecurity*. https://www.undp.org/afghanistan/afghanistan-socioeconomic-review
+
+United Nations Office on Drugs and Crime. (2025). *Afghanistan opium survey 2025*. https://www.un-ilibrary.org/content/books/9789211576474
+
+United Nations Statistics Division. (2026). *UN Comtrade database* [Base de données]. Consulté le 21 novembre 2026, à l'adresse https://comtradeplus.un.org
+
+Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for data science* (2nd ed.). O'Reilly.
+
+Wigell, M. (2016). Conceptualizing regional powers' geoeconomic strategies: Neo-imperialism, neo-mercantilism, hegemony, and liberal institutionalism. *Asia Europe Journal*, *14*, 135–151. https://doi.org/10.1007/s10308-015-0442-x
+
+World Bank. (2026). *Afghanistan development update: The private sector in Afghanistan: Resilient but constrained*. https://thedocs.worldbank.org/en/doc/fc5f2174f83b5e1f650db6068db3347f-0310012026/afghanistan-development-update-may-2026
+
+</div>
+
+<style>
+.references-apa p { padding-left: 2em; text-indent: -2em; }
+</style>
